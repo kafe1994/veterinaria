@@ -11,9 +11,1700 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+      /* ===============================================
+         VETERINARIA CANON - CSS PRINCIPAL
+         Diseñado por Alejandro Liendo
+         =============================================== */
+
+      /* Reset y Variables CSS */
+      :root {
+        /* Colores del Sistema */
+        --color-primary-500: #1E40AF;
+        --color-primary-700: #1E3A8A;
+        --color-primary-100: #DBEAFE;
+        --color-secondary-500: #10B981;
+        --color-accent-500: #F59E0B;
+        
+        --color-bg-page: #F8FAFC;
+        --color-bg-surface: #FFFFFF;
+        --color-text-primary: #111827;
+        --color-text-secondary: #6B7280;
+        --color-success: #10B981;
+        --color-warning: #F59E0B;
+        --color-error: #EF4444;
+        
+        /* Tipografía */
+        --font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+        
+        /* Espaciado (sistema de 8px) */
+        --space-xs: 8px;
+        --space-sm: 16px;
+        --space-md: 24px;
+        --space-lg: 32px;
+        --space-xl: 48px;
+        --space-xxl: 64px;
+        --space-xxxl: 96px;
+        
+        /* Border Radius */
+        --radius-md: 12px;
+        --radius-lg: 16px;
+        
+        /* Sombras */
+        --shadow-md: 0 4px 12px rgba(30, 64, 175, 0.08);
+        --shadow-lg: 0 10px 24px rgba(30, 64, 175, 0.15);
+        
+        /* Transiciones */
+        --transition-base: all 250ms ease-in-out;
+        --transition-card: all 300ms cubic-bezier(0.25, 0.8, 0.25, 1);
+      }
+
+      /* Reset Básico */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        font-size: 16px;
+      }
+
+      body {
+        font-family: var(--font-family);
+        background-color: var(--color-bg-page);
+        color: var(--color-text-primary);
+        line-height: 1.7;
+        overflow-x: hidden;
+      }
+
+      /* ===============================================
+         TIPOGRAFÍA
+         =============================================== */
+
+      h1 {
+        font-size: clamp(2.5rem, 5vw, 3.5rem);
+        font-weight: 700;
+        line-height: 1.2;
+        color: var(--color-text-primary);
+      }
+
+      h2 {
+        font-size: clamp(2rem, 4vw, 2.5rem);
+        font-weight: 700;
+        line-height: 1.3;
+        color: var(--color-text-primary);
+        margin-bottom: var(--space-sm);
+      }
+
+      h3 {
+        font-size: clamp(1.25rem, 3vw, 1.5rem);
+        font-weight: 600;
+        line-height: 1.4;
+        color: var(--color-text-primary);
+        margin-bottom: var(--space-xs);
+      }
+
+      p {
+        font-size: clamp(1rem, 2vw, 1.125rem);
+        font-weight: 400;
+        line-height: 1.7;
+        color: var(--color-text-primary);
+      }
+
+      /* ===============================================
+         LAYOUT GENERAL
+         =============================================== */
+
+      .container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 var(--space-sm);
+      }
+
+      @media (min-width: 768px) {
+        .container {
+          padding: 0 var(--space-lg);
+        }
+      }
+
+      @media (min-width: 1024px) {
+        .container {
+          padding: 0 var(--space-xl);
+        }
+      }
+
+      .section {
+        padding: var(--space-xxxl) 0;
+      }
+
+      /* ===============================================
+         BOTONES
+         =============================================== */
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 var(--space-lg);
+        height: 52px;
+        font-size: 1rem;
+        font-weight: 600;
+        border: none;
+        border-radius: var(--radius-md);
+        text-decoration: none;
+        cursor: pointer;
+        transition: var(--transition-base);
+        font-family: inherit;
+        white-space: nowrap;
+      }
+
+      .btn--primary {
+        background-color: var(--color-primary-500);
+        color: var(--color-bg-surface);
+      }
+
+      .btn--primary:hover {
+        background-color: var(--color-primary-700);
+        transform: translateY(-2px);
+      }
+
+      .btn--secondary {
+        background-color: var(--color-secondary-500);
+        color: var(--color-bg-surface);
+      }
+
+      .btn--secondary:hover {
+        background-color: #059669;
+        transform: translateY(-2px);
+      }
+
+      .btn--accent {
+        background-color: var(--color-accent-500);
+        color: var(--color-bg-surface);
+      }
+
+      .btn--accent:hover {
+        background-color: #D97706;
+        transform: translateY(-2px);
+      }
+
+      .btn--large {
+        padding: 0 var(--space-xl);
+        height: 56px;
+        font-size: 1.125rem;
+      }
+
+      .btn--small {
+        padding: 0 var(--space-sm);
+        height: 40px;
+        font-size: 0.875rem;
+      }
+
+      /* ===============================================
+         HEADER / NAVEGACIÓN
+         =============================================== */
+
+      .header {
+        background-color: var(--color-bg-surface);
+        box-shadow: var(--shadow-md);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        transition: var(--transition-base);
+      }
+
+      .header__container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 80px;
+      }
+
+      .header__logo {
+        display: flex;
+        align-items: center;
+        gap: var(--space-sm);
+        text-decoration: none;
+        color: var(--color-text-primary);
+      }
+
+      .header__logo-icon {
+        width: 40px;
+        height: 40px;
+      }
+
+      .header__logo-text {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--color-primary-500);
+      }
+
+      .header__nav {
+        display: none;
+      }
+
+      .header__nav-list {
+        display: flex;
+        list-style: none;
+        gap: var(--space-lg);
+      }
+
+      .header__nav-link {
+        text-decoration: none;
+        color: var(--color-text-primary);
+        font-weight: 500;
+        transition: var(--transition-base);
+        padding: var(--space-xs) 0;
+        position: relative;
+      }
+
+      .header__nav-link:hover {
+        color: var(--color-primary-500);
+      }
+
+      .header__nav-link::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: var(--color-primary-500);
+        transition: width 300ms ease;
+      }
+
+      .header__nav-link:hover::after {
+        width: 100%;
+      }
+
+      .header__mobile-toggle {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        width: 24px;
+        height: 24px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+      }
+
+      .header__mobile-toggle span {
+        display: block;
+        height: 2px;
+        width: 100%;
+        background-color: var(--color-text-primary);
+        border-radius: 1px;
+        transition: var(--transition-base);
+      }
+
+      .header__mobile-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: var(--color-bg-surface);
+        box-shadow: var(--shadow-md);
+        padding: var(--space-md);
+      }
+
+      .header__mobile-menu.active {
+        display: block;
+      }
+
+      .header__mobile-nav {
+        list-style: none;
+      }
+
+      .header__mobile-nav li {
+        margin-bottom: var(--space-sm);
+      }
+
+      .header__mobile-nav a {
+        display: block;
+        padding: var(--space-sm);
+        text-decoration: none;
+        color: var(--color-text-primary);
+        font-weight: 500;
+        border-radius: var(--radius-md);
+        transition: var(--transition-base);
+      }
+
+      .header__mobile-nav a:hover {
+        background-color: var(--color-primary-100);
+        color: var(--color-primary-500);
+      }
+
+      @media (min-width: 768px) {
+        .header__nav {
+          display: block;
+        }
+        
+        .header__mobile-toggle {
+          display: none;
+        }
+        
+        .header__mobile-menu {
+          display: none !important;
+        }
+      }
+
+      /* ===============================================
+         HERO SECTION
+         =============================================== */
+
+      .hero {
+        position: relative;
+        min-height: 600px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--color-bg-surface);
+        text-align: center;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, rgba(30, 64, 175, 0.8) 0%, rgba(17, 24, 39, 0.6) 100%),
+                    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect width="1200" height="800" fill="%23DBEAFE"/><circle cx="200" cy="150" r="80" fill="%23E0F2FE" opacity="0.7"/><circle cx="800" cy="300" r="120" fill="%23BAE6FD" opacity="0.5"/><circle cx="1000" cy="600" r="100" fill="%23DBEAFE" opacity="0.6"/></svg>');
+        background-size: cover;
+        background-position: center;
+        z-index: -1;
+      }
+
+      .hero__content {
+        position: relative;
+        z-index: 1;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 var(--space-sm);
+      }
+
+      .hero__title {
+        color: var(--color-bg-surface);
+        margin-bottom: var(--space-sm);
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      .hero__subtitle {
+        color: var(--color-primary-100);
+        margin-bottom: var(--space-xl);
+        font-size: clamp(1.125rem, 2.5vw, 1.25rem);
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+      }
+
+      .hero__cta {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-sm);
+        align-items: center;
+      }
+
+      @media (min-width: 768px) {
+        .hero__cta {
+          flex-direction: row;
+          justify-content: center;
+        }
+      }
+
+      /* ===============================================
+         GRIDS Y LAYOUTS
+         =============================================== */
+
+      .grid {
+        display: grid;
+        gap: var(--space-md);
+      }
+
+      .grid--2 {
+        grid-template-columns: 1fr;
+      }
+
+      .grid--3 {
+        grid-template-columns: 1fr;
+      }
+
+      .grid--4 {
+        grid-template-columns: 1fr;
+      }
+
+      @media (min-width: 768px) {
+        .grid--2 {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        
+        .grid--3 {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (min-width: 1024px) {
+        .grid--3 {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        
+        .grid--4 {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      }
+
+      /* ===============================================
+         CARDS
+         =============================================== */
+
+      .card {
+        background-color: var(--color-bg-surface);
+        border-radius: var(--radius-lg);
+        padding: var(--space-lg);
+        box-shadow: var(--shadow-md);
+        transition: var(--transition-card);
+        cursor: pointer;
+      }
+
+      .card:hover {
+        box-shadow: var(--shadow-lg);
+        transform: translateY(-8px);
+      }
+
+      .card--service {
+        text-align: center;
+      }
+
+      .card__icon {
+        width: 64px;
+        height: 64px;
+        margin: 0 auto var(--space-sm);
+        color: var(--color-primary-500);
+        transition: var(--transition-base);
+      }
+
+      .card:hover .card__icon {
+        color: var(--color-secondary-500);
+        transform: scale(1.1);
+      }
+
+      .card__title {
+        margin-bottom: var(--space-xs);
+      }
+
+      .card__description {
+        color: var(--color-text-secondary);
+        font-size: 0.875rem;
+        line-height: 1.6;
+      }
+
+      /* ===============================================
+         BADGES
+         =============================================== */
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-xs);
+        padding: var(--space-xs) var(--space-sm);
+        background-color: var(--color-accent-500);
+        color: var(--color-bg-surface);
+        font-size: 0.75rem;
+        font-weight: 600;
+        border-radius: 20px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .badge--success {
+        background-color: var(--color-success);
+      }
+
+      .badge--primary {
+        background-color: var(--color-primary-500);
+      }
+
+      /* ===============================================
+         SECCIONES ESPECÍFICAS
+         =============================================== */
+
+      .services__header {
+        text-align: center;
+        margin-bottom: var(--space-xl);
+      }
+
+      .about {
+        background-color: var(--color-bg-surface);
+      }
+
+      .about__container {
+        display: grid;
+        gap: var(--space-xl);
+        align-items: center;
+      }
+
+      .about__content {
+        order: 2;
+      }
+
+      .about__image {
+        order: 1;
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        box-shadow: var(--shadow-lg);
+      }
+
+      .about__image img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .about__stats {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-md);
+        margin-top: var(--space-xl);
+      }
+
+      .about__stat {
+        text-align: center;
+        padding: var(--space-md);
+        background-color: var(--color-primary-100);
+        border-radius: var(--radius-md);
+      }
+
+      .about__stat-number {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--color-primary-500);
+        display: block;
+      }
+
+      .about__stat-label {
+        font-size: 0.875rem;
+        color: var(--color-text-secondary);
+        font-weight: 500;
+      }
+
+      @media (min-width: 1024px) {
+        .about__container {
+          grid-template-columns: 1fr 1fr;
+        }
+        
+        .about__content {
+          order: 1;
+        }
+        
+        .about__image {
+          order: 2;
+        }
+        
+        .about__stats {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      }
+
+      .testimonials__header {
+        text-align: center;
+        margin-bottom: var(--space-xl);
+      }
+
+      .testimonials__container {
+        position: relative;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .testimonial {
+        text-align: center;
+      }
+
+      .testimonial__card {
+        background-color: var(--color-bg-surface);
+        border-radius: var(--radius-lg);
+        padding: var(--space-xl);
+        box-shadow: var(--shadow-lg);
+        margin-bottom: var(--space-md);
+        position: relative;
+      }
+
+      .testimonial__quote {
+        width: 48px;
+        height: 48px;
+        margin: 0 auto var(--space-md);
+        color: var(--color-primary-100);
+      }
+
+      .testimonial__text {
+        font-style: italic;
+        font-size: 1.125rem;
+        margin-bottom: var(--space-md);
+        line-height: 1.6;
+      }
+
+      .testimonial__author {
+        font-weight: 600;
+        color: var(--color-text-primary);
+        margin-bottom: var(--space-xs);
+      }
+
+      .testimonial__author-info {
+        font-size: 0.875rem;
+        color: var(--color-text-secondary);
+      }
+
+      .testimonial__rating {
+        display: flex;
+        justify-content: center;
+        gap: var(--space-xs);
+        margin-bottom: var(--space-md);
+      }
+
+      .star {
+        width: 20px;
+        height: 20px;
+        fill: var(--color-accent-500);
+      }
+
+      .testimonials__controls {
+        display: flex;
+        justify-content: center;
+        gap: var(--space-sm);
+      }
+
+      .testimonials__control {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        border: none;
+        background-color: var(--color-text-secondary);
+        cursor: pointer;
+        transition: var(--transition-base);
+      }
+
+      .testimonials__control.active {
+        background-color: var(--color-primary-500);
+      }
+
+      .testimonials__control:hover {
+        background-color: var(--color-primary-700);
+      }
+
+      .contact {
+        background-color: var(--color-bg-surface);
+      }
+
+      .contact__container {
+        display: grid;
+        gap: var(--space-xl);
+      }
+
+      .contact__info {
+        order: 2;
+      }
+
+      .contact__form-wrapper {
+        order: 1;
+      }
+
+      .contact__info-item {
+        display: flex;
+        align-items: center;
+        gap: var(--space-sm);
+        margin-bottom: var(--space-md);
+      }
+
+      .contact__info-icon {
+        width: 24px;
+        height: 24px;
+        color: var(--color-primary-500);
+        flex-shrink: 0;
+      }
+
+      @media (min-width: 1024px) {
+        .contact__container {
+          grid-template-columns: 1fr 1fr;
+        }
+        
+        .contact__info {
+          order: 1;
+        }
+        
+        .contact__form-wrapper {
+          order: 2;
+        }
+      }
+
+      /* ===============================================
+         FORMULARIOS
+         =============================================== */
+
+      .form {
+        background-color: var(--color-bg-surface);
+        border-radius: var(--radius-lg);
+        padding: var(--space-xl);
+        box-shadow: var(--shadow-md);
+      }
+
+      .form__group {
+        margin-bottom: var(--space-md);
+      }
+
+      .form__label {
+        display: block;
+        margin-bottom: var(--space-xs);
+        font-weight: 500;
+        color: var(--color-text-primary);
+      }
+
+      .form__input,
+      .form__textarea,
+      .form__select {
+        width: 100%;
+        padding: var(--space-sm);
+        border: 1px solid #E5E7EB;
+        border-radius: var(--radius-md);
+        background-color: var(--color-bg-page);
+        font-size: 1rem;
+        font-family: inherit;
+        transition: var(--transition-base);
+        min-height: 52px;
+      }
+
+      .form__textarea {
+        min-height: 120px;
+        resize: vertical;
+      }
+
+      .form__input:focus,
+      .form__textarea:focus,
+      .form__select:focus {
+        outline: none;
+        border: 2px solid var(--color-primary-500);
+        box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.2);
+        background-color: var(--color-bg-surface);
+      }
+
+      .form__error {
+        color: var(--color-error);
+        font-size: 0.875rem;
+        margin-top: var(--space-xs);
+        display: none;
+      }
+
+      .form__error.active {
+        display: block;
+      }
+
+      .form__input.error,
+      .form__textarea.error,
+      .form__select.error {
+        border-color: var(--color-error);
+      }
+
+      .form__success {
+        background-color: var(--color-success);
+        color: var(--color-bg-surface);
+        padding: var(--space-md);
+        border-radius: var(--radius-md);
+        text-align: center;
+        font-weight: 500;
+        margin-top: var(--space-md);
+        display: none;
+      }
+
+      .form__success.active {
+        display: block;
+      }
+
+      /* ===============================================
+         FOOTER
+         =============================================== */
+
+      .footer {
+        background-color: var(--color-text-primary);
+        color: var(--color-bg-surface);
+        padding: var(--space-xl) 0 var(--space-md);
+      }
+
+      .footer__container {
+        display: grid;
+        gap: var(--space-xl);
+      }
+
+      .footer__section h3 {
+        color: var(--color-bg-surface);
+        margin-bottom: var(--space-sm);
+      }
+
+      .footer__links {
+        list-style: none;
+      }
+
+      .footer__links li {
+        margin-bottom: var(--space-xs);
+      }
+
+      .footer__links a {
+        color: var(--color-text-secondary);
+        text-decoration: none;
+        transition: var(--transition-base);
+      }
+
+      .footer__links a:hover {
+        color: var(--color-primary-100);
+      }
+
+      .footer__bottom {
+        border-top: 1px solid #374151;
+        padding-top: var(--space-md);
+        margin-top: var(--space-xl);
+        text-align: center;
+        color: var(--color-text-secondary);
+      }
+
+      .footer__bottom a {
+        color: var(--color-primary-100);
+        text-decoration: none;
+      }
+
+      @media (min-width: 768px) {
+        .footer__container {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      /* ===============================================
+         UTILIDADES
+         =============================================== */
+
+      .text-center { text-align: center; }
+      .text-left { text-align: left; }
+      .text-right { text-align: right; }
+
+      .mb-0 { margin-bottom: 0; }
+      .mb-sm { margin-bottom: var(--space-sm); }
+      .mb-md { margin-bottom: var(--space-md); }
+      .mb-lg { margin-bottom: var(--space-lg); }
+      .mb-xl { margin-bottom: var(--space-xl); }
+
+      .mt-0 { margin-top: 0; }
+      .mt-sm { margin-top: var(--space-sm); }
+      .mt-md { margin-top: var(--space-md); }
+      .mt-lg { margin-top: var(--space-lg); }
+      .mt-xl { margin-top: var(--space-xl); }
+
+      .hidden { display: none; }
+      .visible { display: block; }
+
+      /* ===============================================
+         ANIMACIONES
+         =============================================== */
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .animate-fade-in-up {
+        animation: fadeInUp 0.6s ease-out;
+      }
+
+      /* ===============================================
+         RESPONSIVE MEJORADO
+         =============================================== */
+
+      @media (max-width: 767px) {
+        .hero {
+          min-height: 500px;
+        }
+        
+        .btn--large {
+          width: 100%;
+          max-width: 300px;
+        }
+        
+        .section {
+          padding: var(--space-xxl) 0;
+        }
+        
+        .about__stats {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 480px) {
+        .container {
+          padding: 0 var(--space-sm);
+        }
+        
+        .card {
+          padding: var(--space-md);
+        }
+        
+        .form {
+          padding: var(--space-md);
+        }
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+    <header class="header">
+      <div class="container">
+        <div class="header__container">
+          <!-- Logo -->
+          <a href="#inicio" class="header__logo" onclick="scrollToSection('inicio')">
+            <svg class="header__logo-icon" viewBox="0 0 32 32" fill="currentColor">
+              <ellipse cx="16" cy="20" rx="8" ry="5" />
+              <ellipse cx="12" cy="10" rx="3" ry="3.5" />
+              <ellipse cx="16" cy="8" rx="3" ry="3.5" />
+              <ellipse cx="20" cy="10" rx="3" ry="3.5" />
+              <ellipse cx="24" cy="13" rx="3" ry="3.5" />
+            </svg>
+            <span class="header__logo-text">Veterinaria CanOn</span>
+          </a>
+
+          <!-- Navegación Desktop -->
+          <nav class="header__nav" aria-label="Navegación principal">
+            <ul class="header__nav-list">
+              <li><a href="#inicio" class="header__nav-link" onclick="scrollToSection('inicio')">Inicio</a></li>
+              <li><a href="#servicios" class="header__nav-link" onclick="scrollToSection('servicios')">Servicios</a></li>
+              <li><a href="#nosotros" class="header__nav-link" onclick="scrollToSection('nosotros')">Nosotros</a></li>
+              <li><a href="#testimonios" class="header__nav-link" onclick="scrollToSection('testimonios')">Testimonios</a></li>
+              <li><a href="#contacto" class="header__nav-link" onclick="scrollToSection('contacto')">Contacto</a></li>
+            </ul>
+          </nav>
+
+          <!-- Botón menú móvil -->
+          <button class="header__mobile-toggle" onclick="toggleMobileMenu()" aria-label="Abrir menú de navegación">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+
+        <!-- Menú móvil -->
+        <div class="header__mobile-menu" id="mobileMenu">
+          <nav aria-label="Navegación móvil">
+            <ul class="header__mobile-nav">
+              <li><a href="#inicio" onclick="scrollToSection('inicio'); toggleMobileMenu()">Inicio</a></li>
+              <li><a href="#servicios" onclick="scrollToSection('servicios'); toggleMobileMenu()">Servicios</a></li>
+              <li><a href="#nosotros" onclick="scrollToSection('nosotros'); toggleMobileMenu()">Nosotros</a></li>
+              <li><a href="#testimonios" onclick="scrollToSection('testimonios'); toggleMobileMenu()">Testimonios</a></li>
+              <li><a href="#contacto" onclick="scrollToSection('contacto'); toggleMobileMenu()">Contacto</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- Hero Section -->
+      <section id="inicio" class="hero">
+        <div class="hero__content">
+          <h1 class="hero__title">
+            Cuidado Experto para tu Mejor Amigo
+          </h1>
+          <p class="hero__subtitle">
+            Medicina veterinaria de calidad con corazón. Más de 15 años cuidando la salud y felicidad de tus mascotas.
+          </p>
+          <div class="hero__cta">
+            <button class="btn btn--primary btn--large" onclick="scrollToSection('contacto')">
+              Agendar Cita
+            </button>
+            <a href="tel:+1234567890" class="btn btn--accent btn--large">
+              Llamar Ahora
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Services Section -->
+      <section id="servicios" class="section">
+        <div class="container">
+          <div class="services__header">
+            <h2>Nuestros Servicios Veterinarios</h2>
+            <p class="text-center">
+              Ofrecemos atención integral para todas las necesidades de salud de tu mascota
+            </p>
+          </div>
+          
+          <div class="grid grid--4">
+            <!-- Consulta -->
+            <div class="card card--service">
+              <svg class="card__icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+              </svg>
+              <h3 class="card__title">Consulta General</h3>
+              <p class="card__description">Exámenes completos, diagnósticos precisos y planes de tratamiento personalizados para mantener a tu mascota saludable.</p>
+            </div>
+
+            <!-- Urgencias -->
+            <div class="card card--service">
+              <span class="badge badge--primary mb-sm">24/7</span>
+              <svg class="card__icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+              </svg>
+              <h3 class="card__title">Urgencias 24/7</h3>
+              <p class="card__description">Servicio de emergencias veterinarias disponible las 24 horas para atender cualquier situación crítica.</p>
+            </div>
+
+            <!-- Vacunación -->
+            <div class="card card--service">
+              <span class="badge badge--primary mb-sm">Importante</span>
+              <svg class="card__icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1 11h-4v4h-4v-4H6v-4h4V6h4v4h4v4z"/>
+              </svg>
+              <h3 class="card__title">Vacunación</h3>
+              <p class="card__description">Programas completos de vacunación y desparasitación para prevenir enfermedades y mantener la salud óptima.</p>
+            </div>
+
+            <!-- Cirugía -->
+            <div class="card card--service">
+              <svg class="card__icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17 2H7c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 16H8V4h8v14zm-1-2V6h-2v2h-2v2h2v2h2v-2h2V8h-2z"/>
+              </svg>
+              <h3 class="card__title">Cirugía</h3>
+              <p class="card__description">Procedimientos quirúrgicos especializados con equipos modernos y protocolo de seguridad avanzado.</p>
+            </div>
+          </div>
+
+          <div class="text-center mt-xl">
+            <button class="btn btn--primary" onclick="scrollToSection('contacto')">
+              Consulta Personalizada
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- About Section -->
+      <section id="nosotros" class="about section">
+        <div class="container">
+          <div class="about__container">
+            <!-- Contenido principal -->
+            <div class="about__content">
+              <h2>¿Por Qué Elegir Veterinaria CanOn?</h2>
+              <p class="mb-lg">
+                Con más de 15 años de experiencia, nos hemos convertido en la clínica veterinaria de 
+                confianza para miles de familias. Nuestro equipo de profesionales apasionados combina 
+                conocimiento médico de vanguardia con el amor genuino hacia los animales.
+              </p>
+              
+              <p class="mb-lg">
+                Cada mascota que llega a nuestras instalaciones recibe atención personalizada, 
+                diagnósticos precisos y tratamientos adaptados a sus necesidades específicas. 
+                Creemos que cada animal merece el mejor cuidado posible.
+              </p>
+
+              <!-- Lista de beneficios -->
+              <div class="about__benefits mb-lg">
+                <h3 class="mb-md">Lo que nos hace especiales:</h3>
+                <div class="grid grid--2">
+                  <div class="about__benefit">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="color: var(--color-success);">
+                      <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+                    </svg>
+                    <span style="margin-left: 8px;">Atención personalizada y cálida</span>
+                  </div>
+                  <div class="about__benefit">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="color: var(--color-success);">
+                      <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+                    </svg>
+                    <span style="margin-left: 8px;">Tecnología veterinaria avanzada</span>
+                  </div>
+                  <div class="about__benefit">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="color: var(--color-success);">
+                      <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+                    </svg>
+                    <span style="margin-left: 8px;">Equipo médico especializado</span>
+                  </div>
+                  <div class="about__benefit">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="color: var(--color-success);">
+                      <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+                    </svg>
+                    <span style="margin-left: 8px;">Horarios flexibles de atención</span>
+                  </div>
+                  <div class="about__benefit">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="color: var(--color-success);">
+                      <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+                    </svg>
+                    <span style="margin-left: 8px;">Seguimiento post-consulta</span>
+                  </div>
+                  <div class="about__benefit">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="color: var(--color-success);">
+                      <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+                    </svg>
+                    <span style="margin-left: 8px;">Emergencias 24/7</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Estadísticas -->
+              <div class="about__stats">
+                <div class="about__stat">
+                  <span class="about__stat-number" id="expCounter">0</span>
+                  <span class="about__stat-label">Años de Experiencia</span>
+                </div>
+                <div class="about__stat">
+                  <span class="about__stat-number" id="petsCounter">0</span>
+                  <span class="about__stat-label">Mascotas Atendidas</span>
+                </div>
+                <div class="about__stat">
+                  <span class="about__stat-number" id="satCounter">0</span>
+                  <span class="about__stat-label">% Satisfacción</span>
+                </div>
+                <div class="about__stat">
+                  <span class="about__stat-number" id="docCounter">0</span>
+                  <span class="about__stat-label">Veterinarios</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Imagen -->
+            <div class="about__image">
+              <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 400'><rect width='600' height='400' fill='%23DBEAFE'/><circle cx='300' cy='200' r='80' fill='%231E40AF' opacity='0.7'/><rect x='250' y='300' width='100' height='60' fill='%231E3A8A' opacity='0.8'/><text x='300' y='210' text-anchor='middle' fill='white' font-size='24' font-weight='bold'>VETERINARIOS</text><text x='300' y='240' text-anchor='middle' fill='white' font-size='16'>PROFESIONALES</text></svg>" alt="Veterinarios profesionales de CanOn">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Testimonials Section -->
+      <section id="testimonios" class="section">
+        <div class="container">
+          <div class="testimonials__header">
+            <h2>Lo Que Dicen Nuestros Clientes</h2>
+            <p class="text-center">
+              Miles de familias confían en nosotros para el cuidado de sus mascotas
+            </p>
+          </div>
+
+          <div class="testimonials__container">
+            <!-- Carrusel de testimonios -->
+            <div class="testimonial">
+              <div class="testimonial__card">
+                <!-- Comillas -->
+                <svg class="testimonial__quote" viewBox="0 0 48 48" fill="currentColor">
+                  <path d="M40 8H24v12h8v16h16V24H32V8zm-16 0H8v12h8v16h16V24H24V8z"/>
+                </svg>
+
+                <!-- Calificación con estrellas -->
+                <div class="testimonial__rating" id="testimonialRating">
+                  <!-- Las estrellas se generarán con JavaScript -->
+                </div>
+
+                <!-- Texto del testimonio -->
+                <blockquote class="testimonial__text" id="testimonialText">
+                  ""
+                </blockquote>
+
+                <!-- Información del autor -->
+                <div class="testimonial__author" id="testimonialAuthor">
+                  
+                </div>
+                <div class="testimonial__author-info" id="testimonialAuthorInfo">
+                  
+                </div>
+              </div>
+
+              <!-- Controles del carrusel -->
+              <div class="testimonials__controls" id="testimonialControls">
+                <!-- Los controles se generarán con JavaScript -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact Section -->
+      <section id="contacto" class="contact section">
+        <div class="container">
+          <div class="contact__container">
+            <!-- Información de contacto -->
+            <div class="contact__info">
+              <h2>Contáctanos</h2>
+              <p class="mb-lg">
+                Estamos aquí para ayudarte. Contáctanos para agendar una cita o resolver cualquier duda sobre el cuidado de tu mascota.
+              </p>
+
+              <!-- Información de contacto -->
+              <div class="contact__info-list">
+                <div class="contact__info-item">
+                  <svg class="contact__info-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                  </svg>
+                  <div>
+                    <h4 style="margin: 0; font-size: 1rem; font-weight: 600;">Dirección</h4>
+                    <p style="margin: 4px 0 0 0; color: var(--color-text-secondary); white-space: pre-line;">
+                      Av. Principal 123, Ciudad, Estado 12345
+                    </p>
+                  </div>
+                </div>
+
+                <div class="contact__info-item">
+                  <svg class="contact__info-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                  </svg>
+                  <div>
+                    <h4 style="margin: 0; font-size: 1rem; font-weight: 600;">Teléfono</h4>
+                    <p style="margin: 4px 0 0 0; color: var(--color-text-secondary);">
+                      +1 (234) 567-8900
+                    </p>
+                  </div>
+                </div>
+
+                <div class="contact__info-item">
+                  <svg class="contact__info-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                  </svg>
+                  <div>
+                    <h4 style="margin: 0; font-size: 1rem; font-weight: 600;">Horarios</h4>
+                    <p style="margin: 4px 0 0 0; color: var(--color-text-secondary); white-space: pre-line;">
+                      Lun - Vie: 8:00 AM - 8:00 PM
+Sáb - Dom: 9:00 AM - 6:00 PM
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Mapa placeholder -->
+              <div style="margin-top: var(--space-lg); border-radius: var(--radius-lg); overflow: hidden;">
+                <div style="width: 100%; height: 300px; background-color: var(--color-primary-100); display: flex; align-items: center; justify-content: center; color: var(--color-primary-500); font-size: 1.125rem; font-weight: 600;">
+                  🗺️ Mapa Interactivo
+                  <br>
+                  <small style="font-size: 0.875rem; font-weight: normal;">
+                    Ubicación de la veterinaria
+                  </small>
+                </div>
+              </div>
+            </div>
+
+            <!-- Formulario de contacto -->
+            <div class="contact__form-wrapper">
+              <div class="form">
+                <h3 class="mb-md">Envíanos un Mensaje</h3>
+                
+                <div class="form__success" id="formSuccess" style="display: none;">
+                  ¡Gracias por tu mensaje! Te contactaremos pronto.
+                </div>
+
+                <form id="contactForm" onsubmit="handleSubmit(event)" novalidate>
+                  <div class="form__group">
+                    <label for="nombre" class="form__label">Nombre Completo *</label>
+                    <input type="text" id="nombre" name="nombre" class="form__input" placeholder="Tu nombre completo" required>
+                    <span class="form__error" id="nombreError"></span>
+                  </div>
+
+                  <div class="form__group">
+                    <label for="email" class="form__label">Correo Electrónico *</label>
+                    <input type="email" id="email" name="email" class="form__input" placeholder="tu@email.com" required>
+                    <span class="form__error" id="emailError"></span>
+                  </div>
+
+                  <div class="form__group">
+                    <label for="telefono" class="form__label">Teléfono *</label>
+                    <input type="tel" id="telefono" name="telefono" class="form__input" placeholder="+1 (234) 567-8900" required>
+                    <span class="form__error" id="telefonoError"></span>
+                  </div>
+
+                  <div class="form__group">
+                    <label for="mascota" class="form__label">Nombre de tu Mascota *</label>
+                    <input type="text" id="mascota" name="mascota" class="form__input" placeholder="Nombre de tu mascota" required>
+                    <span class="form__error" id="mascotaError"></span>
+                  </div>
+
+                  <div class="form__group">
+                    <label for="mensaje" class="form__label">Mensaje *</label>
+                    <textarea id="mensaje" name="mensaje" class="form__textarea" placeholder="Cuéntanos sobre tu consulta o situación..." required></textarea>
+                    <span class="form__error" id="mensajeError"></span>
+                  </div>
+
+                  <button type="submit" class="btn btn--secondary" id="submitBtn" style="width: 100%;">
+                    Enviar Mensaje
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer__container">
+          <!-- Información de la empresa -->
+          <div class="footer__section">
+            <div style="display: flex; align-items: center; gap: var(--space-sm); margin-bottom: var(--space-sm);">
+              <svg width="40" height="40" viewBox="0 0 32 32" fill="currentColor" style="color: var(--color-primary-100);">
+                <ellipse cx="16" cy="20" rx="8" ry="5"/>
+                <ellipse cx="12" cy="10" rx="3" ry="3.5"/>
+                <ellipse cx="16" cy="8" rx="3" ry="3.5"/>
+                <ellipse cx="20" cy="10" rx="3" ry="3.5"/>
+                <ellipse cx="24" cy="13" rx="3" ry="3.5"/>
+              </svg>
+              <h3 style="margin: 0; font-size: 1.5rem; font-weight: 700;">Veterinaria CanOn</h3>
+            </div>
+            <p style="color: var(--color-text-secondary); line-height: 1.6; margin-bottom: var(--space-sm);">
+              Cuidado experto para tu mejor amigo. Más de 15 años brindando medicina veterinaria de calidad con amor y dedicación.
+            </p>
+            <div style="display: flex; gap: var(--space-sm);">
+              <a href="https://facebook.com/veterinariacanon" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; background-color: var(--color-primary-500); color: var(--color-bg-surface); border-radius: 50%; transition: var(--transition-base); text-decoration: none;" onmouseover="this.style.backgroundColor='var(--color-primary-700)'; this.style.transform='translateY(-2px)';" onmouseout="this.style.backgroundColor='var(--color-primary-500)'; this.style.transform='translateY(0)';">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+              </a>
+              <a href="https://instagram.com/veterinariacanon" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; background-color: var(--color-primary-500); color: var(--color-bg-surface); border-radius: 50%; transition: var(--transition-base); text-decoration: none;" onmouseover="this.style.backgroundColor='var(--color-primary-700)'; this.style.transform='translateY(-2px)';" onmouseout="this.style.backgroundColor='var(--color-primary-500)'; this.style.transform='translateY(0)';">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.62 5.367 11.987 11.988 11.987c6.62 0 11.987-5.367 11.987-11.987C24.014 5.367 18.637.001 12.017.001zM8.449 16.988c-1.297 0-2.448-.49-3.323-1.297C4.198 14.824 3.708 13.673 3.708 12.376s.49-2.448 1.418-3.323c.875-.807 2.026-1.297 3.323-1.297s2.448.49 3.323 1.297c.928.875 1.418 2.026 1.418 3.323s-.49 2.448-1.418 3.323c-.875.807-2.026 1.297-3.323 1.297z"/>
+                </svg>
+              </a>
+              <a href="https://wa.me/1234567890" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; background-color: var(--color-primary-500); color: var(--color-bg-surface); border-radius: 50%; transition: var(--transition-base); text-decoration: none;" onmouseover="this.style.backgroundColor='var(--color-primary-700)'; this.style.transform='translateY(-2px)';" onmouseout="this.style.backgroundColor='var(--color-primary-500)'; this.style.transform='translateY(0)';">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.687"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Enlaces rápidos -->
+          <div class="footer__section">
+            <h3>Enlaces Rápidos</h3>
+            <ul class="footer__links">
+              <li><a href="#inicio" onclick="scrollToSection('inicio')">Inicio</a></li>
+              <li><a href="#servicios" onclick="scrollToSection('servicios')">Servicios</a></li>
+              <li><a href="#nosotros" onclick="scrollToSection('nosotros')">Nosotros</a></li>
+              <li><a href="#testimonios" onclick="scrollToSection('testimonios')">Testimonios</a></li>
+              <li><a href="#contacto" onclick="scrollToSection('contacto')">Contacto</a></li>
+            </ul>
+          </div>
+
+          <!-- Servicios -->
+          <div class="footer__section">
+            <h3>Nuestros Servicios</h3>
+            <ul class="footer__links">
+              <li><a href="#servicios" onclick="scrollToSection('servicios')">Consulta General</a></li>
+              <li><a href="#servicios" onclick="scrollToSection('servicios')">Urgencias 24/7</a></li>
+              <li><a href="#servicios" onclick="scrollToSection('servicios')">Vacunación</a></li>
+              <li><a href="#servicios" onclick="scrollToSection('servicios')">Cirugía</a></li>
+              <li><a href="#servicios" onclick="scrollToSection('servicios')">Dental</a></li>
+              <li><a href="#servicios" onclick="scrollToSection('servicios')">Grooming</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Información de contacto en el footer -->
+        <div style="border-top: 1px solid #374151; margin-top: var(--space-xl); padding-top: var(--space-md); text-align: center; color: var(--color-text-secondary);">
+          <div style="margin-bottom: var(--space-sm);">
+            <strong style="color: var(--color-bg-surface);">📍 Av. Principal 123, Ciudad, Estado 12345</strong>
+          </div>
+          <div style="margin-bottom: var(--space-sm);">
+            <strong style="color: var(--color-bg-surface);">📞 +1 (234) 567-8900</strong>
+          </div>
+          <div style="margin-bottom: var(--space-sm);">
+            <strong style="color: var(--color-bg-surface);">⏰ Lun - Vie: 8:00 AM - 8:00 PM | Sáb - Dom: 9:00 AM - 6:00 PM</strong>
+          </div>
+        </div>
+
+        <!-- Copyright -->
+        <div class="footer__bottom">
+          <p style="margin: 0;">
+            © 2025 Veterinaria CanOn. Todos los derechos reservados. | 
+            <span style="margin-left: 8px;">
+              <strong>Diseñado por Alejandro Liendo</strong>
+            </span>
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // ===============================================
+      // JAVASCRIPT FUNCIONAL
+      // Diseñado por Alejandro Liendo
+      // ===============================================
+
+      // Smooth scroll functionality
+      function scrollToSection(sectionId) {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      }
+
+      // Mobile menu toggle
+      function toggleMobileMenu() {
+        const menu = document.getElementById('mobileMenu');
+        menu.classList.toggle('active');
+      }
+
+      // Animated counters
+      function animateCounter(elementId, end, duration) {
+        const element = document.getElementById(elementId);
+        const start = 0;
+        const increment = end / (duration / 16);
+        let current = start;
+
+        const timer = setInterval(() => {
+          current += increment;
+          if (current >= end) {
+            element.textContent = end.toLocaleString();
+            clearInterval(timer);
+          } else {
+            element.textContent = Math.floor(current).toLocaleString();
+          }
+        }, 16);
+      }
+
+      // Testimonials data
+      const testimonials = [
+        {
+          text: "Excelente atención. Los veterinarios son muy profesionales y amables. Mi perro Max se sintió muy cómodo durante toda la consulta. Definitivamente volveremos.",
+          author: "María González",
+          authorInfo: "Dueña de Max (Golden Retriever)",
+          rating: 5
+        },
+        {
+          text: "Llevamos a nuestros gatos aquí hace 3 años. Siempre nos brindan el mejor cuidado y han sido fundamentales para mantener a Luna y Oliver saludables.",
+          author: "Carlos Rodríguez",
+          authorInfo: "Dueño de Luna y Oliver (Gatos)",
+          rating: 5
+        },
+        {
+          text: "Cuando mi perra tuvo una emergencia a las 2 AM, ellos estuvieron disponibles inmediatamente. Su rapidez y profesionalismo salvaron la vida de Bella.",
+          author: "Ana Martínez",
+          authorInfo: "Dueña de Bella (Border Collie)",
+          rating: 5
+        },
+        {
+          text: "El trato es excepcional, tanto para las mascotas como para los dueños. Se nota que aman lo que hacen y tienen mucha experiencia.",
+          author: "Roberto Silva",
+          authorInfo: "Dueño de Rocky (Pastor Alemán)",
+          rating: 5
+        }
+      ];
+
+      let currentTestimonial = 0;
+
+      // Render stars
+      function renderStars(rating) {
+        let starsHTML = '';
+        for (let i = 0; i < 5; i++) {
+          const fill = i < rating ? 'var(--color-accent-500)' : 'var(--color-text-secondary)';
+          const opacity = i < rating ? '1' : '0.3';
+          starsHTML += `<svg class="star" viewBox="0 0 24 24" fill="${fill}" style="opacity: ${opacity};">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+          </svg>`;
+        }
+        return starsHTML;
+      }
+
+      // Render testimonial
+      function renderTestimonial(index) {
+        const testimonial = testimonials[index];
+        document.getElementById('testimonialRating').innerHTML = renderStars(testimonial.rating);
+        document.getElementById('testimonialText').textContent = `"${testimonial.text}"`;
+        document.getElementById('testimonialAuthor').textContent = testimonial.author;
+        document.getElementById('testimonialAuthorInfo').textContent = testimonial.authorInfo;
+      }
+
+      // Render controls
+      function renderControls() {
+        let controlsHTML = '';
+        for (let i = 0; i < testimonials.length; i++) {
+          const activeClass = i === currentTestimonial ? 'active' : '';
+          controlsHTML += `<button class="testimonials__control ${activeClass}" onclick="goToTestimonial(${i})" aria-label="Ver testimonio ${i + 1}"></button>`;
+        }
+        document.getElementById('testimonialControls').innerHTML = controlsHTML;
+      }
+
+      // Go to testimonial
+      function goToTestimonial(index) {
+        currentTestimonial = index;
+        renderTestimonial(currentTestimonial);
+        renderControls();
+      }
+
+      // Next testimonial
+      function nextTestimonial() {
+        currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+        renderTestimonial(currentTestimonial);
+        renderControls();
+      }
+
+      // Form validation
+      function validateForm() {
+        let isValid = true;
+        const errors = {};
+
+        // Validate nombre
+        const nombre = document.getElementById('nombre').value.trim();
+        if (!nombre) {
+          errors.nombre = 'El nombre es obligatorio';
+          isValid = false;
+        }
+
+        // Validate email
+        const email = document.getElementById('email').value.trim();
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!email) {
+          errors.email = 'El email es obligatorio';
+          isValid = false;
+        } else if (!emailRegex.test(email)) {
+          errors.email = 'El email no es válido';
+          isValid = false;
+        }
+
+        // Validate teléfono
+        const telefono = document.getElementById('telefono').value.trim();
+        const phoneRegex = /^[+]?[\d\s\-()]+$/;
+        if (!telefono) {
+          errors.telefono = 'El teléfono es obligatorio';
+          isValid = false;
+        } else if (!phoneRegex.test(telefono)) {
+          errors.telefono = 'El teléfono no es válido';
+          isValid = false;
+        }
+
+        // Validate mascota
+        const mascota = document.getElementById('mascota').value.trim();
+        if (!mascota) {
+          errors.mascota = 'El nombre de la mascota es obligatorio';
+          isValid = false;
+        }
+
+        // Validate mensaje
+        const mensaje = document.getElementById('mensaje').value.trim();
+        if (!mensaje) {
+          errors.mensaje = 'El mensaje es obligatorio';
+          isValid = false;
+        }
+
+        // Display errors
+        Object.keys(errors).forEach(field => {
+          const errorElement = document.getElementById(field + 'Error');
+          const inputElement = document.getElementById(field);
+          
+          if (errors[field]) {
+            errorElement.textContent = errors[field];
+            errorElement.classList.add('active');
+            inputElement.classList.add('error');
+          } else {
+            errorElement.textContent = '';
+            errorElement.classList.remove('active');
+            inputElement.classList.remove('error');
+          }
+        });
+
+        return isValid;
+      }
+
+      // Handle form submission
+      function handleSubmit(event) {
+        event.preventDefault();
+        
+        if (!validateForm()) {
+          return;
+        }
+
+        const submitBtn = document.getElementById('submitBtn');
+        const originalText = submitBtn.textContent;
+        submitBtn.textContent = 'Enviando...';
+        submitBtn.disabled = true;
+
+        // Simulate form submission
+        setTimeout(() => {
+          document.getElementById('formSuccess').style.display = 'block';
+          document.getElementById('contactForm').reset();
+          submitBtn.textContent = originalText;
+          submitBtn.disabled = false;
+          
+          // Hide success message after 5 seconds
+          setTimeout(() => {
+            document.getElementById('formSuccess').style.display = 'none';
+          }, 5000);
+        }, 2000);
+      }
+
+      // Intersection Observer for animations
+      function setupIntersectionObserver() {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              if (entry.target.id === 'nosotros') {
+                // Start counters when about section is visible
+                setTimeout(() => {
+                  animateCounter('expCounter', 15, 2000);
+                  animateCounter('petsCounter', 5000, 2500);
+                  animateCounter('satCounter', 98, 1800);
+                  animateCounter('docCounter', 12, 1500);
+                }, 500);
+              }
+            }
+          });
+        }, { threshold: 0.5 });
+
+        observer.observe(document.getElementById('nosotros'));
+      }
+
+      // Close mobile menu when clicking outside
+      function closeMobileMenuOnClick(event) {
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileToggle = document.querySelector('.header__mobile-toggle');
+        
+        if (!mobileMenu.contains(event.target) && !mobileToggle.contains(event.target)) {
+          mobileMenu.classList.remove('active');
+        }
+      }
+
+      // Initialize everything when page loads
+      document.addEventListener('DOMContentLoaded', function() {
+        // Initialize testimonials
+        renderTestimonial(currentTestimonial);
+        renderControls();
+        
+        // Auto-advance testimonials every 5 seconds
+        setInterval(nextTestimonial, 5000);
+        
+        // Setup intersection observer for animations
+        setupIntersectionObserver();
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', closeMobileMenuOnClick);
+        
+        // Add keyboard navigation for testimonials
+        document.addEventListener('keydown', function(event) {
+          if (event.key === 'ArrowLeft') {
+            currentTestimonial = (currentTestimonial - 1 + testimonials.length) % testimonials.length;
+            renderTestimonial(currentTestimonial);
+            renderControls();
+          } else if (event.key === 'ArrowRight') {
+            nextTestimonial();
+          }
+        });
+      });
+
+      // Handle window resize for mobile menu
+      window.addEventListener('resize', function() {
+        if (window.innerWidth >= 768) {
+          document.getElementById('mobileMenu').classList.remove('active');
+        }
+      });
+    </script>
   </body>
 </html>
