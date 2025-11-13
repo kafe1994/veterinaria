@@ -14,8 +14,9 @@
     
     <style>
       /* ===============================================
-         VETERINARIA CANON - CSS PRINCIPAL
+         VETERINARIA CANON - CSS PRINCIPAL MEJORADO
          Diseñado por Alejandro Liendo
+         Versión con imágenes de mascotas y diseño alegre
          =============================================== */
 
       /* Reset y Variables CSS */
@@ -26,14 +27,18 @@
         --color-primary-100: #DBEAFE;
         --color-secondary-500: #10B981;
         --color-accent-500: #F59E0B;
+        --color-accent-400: #FBBF24;
         
-        --color-bg-page: #F8FAFC;
+        --color-bg-page: #FEFEFE;
         --color-bg-surface: #FFFFFF;
         --color-text-primary: #111827;
         --color-text-secondary: #6B7280;
         --color-success: #10B981;
         --color-warning: #F59E0B;
         --color-error: #EF4444;
+        --color-pink: #F472B6;
+        --color-purple: #A855F7;
+        --color-rose: #F43F5E;
         
         /* Tipografía */
         --font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
@@ -50,14 +55,18 @@
         /* Border Radius */
         --radius-md: 12px;
         --radius-lg: 16px;
+        --radius-xl: 20px;
         
         /* Sombras */
         --shadow-md: 0 4px 12px rgba(30, 64, 175, 0.08);
         --shadow-lg: 0 10px 24px rgba(30, 64, 175, 0.15);
+        --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.1);
+        --shadow-colorful: 0 8px 32px rgba(245, 158, 11, 0.2);
         
         /* Transiciones */
         --transition-base: all 250ms ease-in-out;
         --transition-card: all 300ms cubic-bezier(0.25, 0.8, 0.25, 1);
+        --transition-bounce: all 400ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
       }
 
       /* Reset Básico */
@@ -74,10 +83,57 @@
 
       body {
         font-family: var(--font-family);
-        background-color: var(--color-bg-page);
+        background: linear-gradient(135deg, #FEFEFE 0%, #F7FAFC 100%);
         color: var(--color-text-primary);
         line-height: 1.7;
         overflow-x: hidden;
+      }
+
+      /* ===============================================
+         ANIMACIONES ESPECIALES
+         =============================================== */
+
+      @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+      }
+
+      @keyframes wiggle {
+        0%, 100% { transform: rotate(-3deg); }
+        50% { transform: rotate(3deg); }
+      }
+
+      @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .animate-float {
+        animation: float 3s ease-in-out infinite;
+      }
+
+      .animate-wiggle {
+        animation: wiggle 1s ease-in-out infinite;
+      }
+
+      .animate-pulse {
+        animation: pulse 2s ease-in-out infinite;
+      }
+
+      .fade-in-up {
+        animation: fadeInUp 0.6s ease-out;
       }
 
       /* ===============================================
@@ -100,7 +156,7 @@
       }
 
       h3 {
-        font-size: clamp(1.25rem, 3vw, 1.5rem);
+        font-size: clamp(1.25rem, 2.5vw, 1.5rem);
         font-weight: 600;
         line-height: 1.4;
         color: var(--color-text-primary);
@@ -108,138 +164,83 @@
       }
 
       p {
-        font-size: clamp(1rem, 2vw, 1.125rem);
-        font-weight: 400;
+        font-size: 1rem;
         line-height: 1.7;
-        color: var(--color-text-primary);
+        color: var(--color-text-secondary);
+        margin-bottom: var(--space-sm);
       }
 
+      .text-center { text-align: center; }
+      .text-left { text-align: left; }
+      .text-right { text-align: right; }
+
       /* ===============================================
-         LAYOUT GENERAL
+         LAYOUT PRINCIPAL
          =============================================== */
 
       .container {
-        max-width: 1280px;
+        max-width: 1200px;
         margin: 0 auto;
         padding: 0 var(--space-sm);
       }
 
-      @media (min-width: 768px) {
-        .container {
-          padding: 0 var(--space-lg);
-        }
-      }
-
-      @media (min-width: 1024px) {
-        .container {
-          padding: 0 var(--space-xl);
-        }
-      }
-
       .section {
         padding: var(--space-xxxl) 0;
+        position: relative;
+      }
+
+      .section:nth-child(even) {
+        background: linear-gradient(135deg, #F8FAFC 0%, #F1F5F9 100%);
       }
 
       /* ===============================================
-         BOTONES
-         =============================================== */
-
-      .btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0 var(--space-lg);
-        height: 52px;
-        font-size: 1rem;
-        font-weight: 600;
-        border: none;
-        border-radius: var(--radius-md);
-        text-decoration: none;
-        cursor: pointer;
-        transition: var(--transition-base);
-        font-family: inherit;
-        white-space: nowrap;
-      }
-
-      .btn--primary {
-        background-color: var(--color-primary-500);
-        color: var(--color-bg-surface);
-      }
-
-      .btn--primary:hover {
-        background-color: var(--color-primary-700);
-        transform: translateY(-2px);
-      }
-
-      .btn--secondary {
-        background-color: var(--color-secondary-500);
-        color: var(--color-bg-surface);
-      }
-
-      .btn--secondary:hover {
-        background-color: #059669;
-        transform: translateY(-2px);
-      }
-
-      .btn--accent {
-        background-color: var(--color-accent-500);
-        color: var(--color-bg-surface);
-      }
-
-      .btn--accent:hover {
-        background-color: #D97706;
-        transform: translateY(-2px);
-      }
-
-      .btn--large {
-        padding: 0 var(--space-xl);
-        height: 56px;
-        font-size: 1.125rem;
-      }
-
-      .btn--small {
-        padding: 0 var(--space-sm);
-        height: 40px;
-        font-size: 0.875rem;
-      }
-
-      /* ===============================================
-         HEADER / NAVEGACIÓN
+         HEADER Y NAVEGACIÓN
          =============================================== */
 
       .header {
-        background-color: var(--color-bg-surface);
-        box-shadow: var(--shadow-md);
-        position: sticky;
+        position: fixed;
         top: 0;
-        z-index: 100;
+        left: 0;
+        right: 0;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(30, 64, 175, 0.1);
+        z-index: 1000;
         transition: var(--transition-base);
+      }
+
+      .header--scrolled {
+        background: rgba(255, 255, 255, 0.98);
+        box-shadow: var(--shadow-md);
       }
 
       .header__container {
         display: flex;
-        align-items: center;
         justify-content: space-between;
-        height: 80px;
+        align-items: center;
+        padding: var(--space-sm) 0;
       }
 
       .header__logo {
         display: flex;
         align-items: center;
-        gap: var(--space-sm);
+        gap: var(--space-xs);
         text-decoration: none;
-        color: var(--color-text-primary);
+        color: var(--color-primary-500);
+        font-weight: 700;
+        font-size: 1.5rem;
+        transition: var(--transition-base);
+      }
+
+      .header__logo:hover {
+        color: var(--color-primary-700);
+        transform: scale(1.05);
       }
 
       .header__logo-icon {
-        width: 40px;
-        height: 40px;
-      }
-
-      .header__logo-text {
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: var(--color-primary-500);
+        width: 32px;
+        height: 32px;
+        color: var(--color-accent-500);
       }
 
       .header__nav {
@@ -250,55 +251,59 @@
         display: flex;
         list-style: none;
         gap: var(--space-lg);
+        margin: 0;
+        padding: 0;
       }
 
       .header__nav-link {
         text-decoration: none;
-        color: var(--color-text-primary);
+        color: var(--color-text-secondary);
         font-weight: 500;
+        padding: var(--space-xs) var(--space-sm);
+        border-radius: var(--radius-md);
         transition: var(--transition-base);
-        padding: var(--space-xs) 0;
         position: relative;
+      }
+
+      .header__nav-link::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--color-primary-500), var(--color-accent-500));
+        transition: var(--transition-base);
+        transform: translateX(-50%);
       }
 
       .header__nav-link:hover {
         color: var(--color-primary-500);
+        background-color: rgba(30, 64, 175, 0.05);
       }
 
-      .header__nav-link::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 0;
-        height: 2px;
-        background-color: var(--color-primary-500);
-        transition: width 300ms ease;
+      .header__nav-link:hover::before {
+        width: 80%;
       }
 
-      .header__nav-link:hover::after {
-        width: 100%;
+      .header__cta {
+        display: none;
       }
 
-      .header__mobile-toggle {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        width: 24px;
-        height: 24px;
+      .header__mobile-btn {
+        display: block;
         background: none;
         border: none;
+        font-size: 1.5rem;
+        color: var(--color-primary-500);
         cursor: pointer;
-        padding: 0;
+        padding: var(--space-xs);
+        border-radius: var(--radius-md);
+        transition: var(--transition-base);
       }
 
-      .header__mobile-toggle span {
-        display: block;
-        height: 2px;
-        width: 100%;
-        background-color: var(--color-text-primary);
-        border-radius: 1px;
-        transition: var(--transition-base);
+      .header__mobile-btn:hover {
+        background-color: rgba(30, 64, 175, 0.1);
       }
 
       .header__mobile-menu {
@@ -307,36 +312,38 @@
         top: 100%;
         left: 0;
         right: 0;
-        background-color: var(--color-bg-surface);
-        box-shadow: var(--shadow-md);
+        background: var(--color-bg-surface);
+        border-bottom: 1px solid rgba(30, 64, 175, 0.1);
+        box-shadow: var(--shadow-lg);
         padding: var(--space-md);
       }
 
       .header__mobile-menu.active {
         display: block;
+        animation: fadeInUp 0.3s ease-out;
       }
 
-      .header__mobile-nav {
+      .header__mobile-nav-list {
         list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-sm);
       }
 
-      .header__mobile-nav li {
-        margin-bottom: var(--space-sm);
-      }
-
-      .header__mobile-nav a {
-        display: block;
-        padding: var(--space-sm);
+      .header__mobile-nav-link {
         text-decoration: none;
-        color: var(--color-text-primary);
+        color: var(--color-text-secondary);
         font-weight: 500;
+        padding: var(--space-sm);
         border-radius: var(--radius-md);
         transition: var(--transition-base);
       }
 
-      .header__mobile-nav a:hover {
-        background-color: var(--color-primary-100);
+      .header__mobile-nav-link:hover {
         color: var(--color-primary-500);
+        background-color: rgba(30, 64, 175, 0.05);
       }
 
       @media (min-width: 768px) {
@@ -344,12 +351,16 @@
           display: block;
         }
         
-        .header__mobile-toggle {
+        .header__cta {
+          display: block;
+        }
+        
+        .header__mobile-btn {
           display: none;
         }
         
         .header__mobile-menu {
-          display: none !important;
+          display: none;
         }
       }
 
@@ -358,14 +369,14 @@
          =============================================== */
 
       .hero {
-        position: relative;
-        min-height: 600px;
+        min-height: 100vh;
         display: flex;
         align-items: center;
-        justify-content: center;
-        color: var(--color-bg-surface);
+        position: relative;
+        background: linear-gradient(135deg, rgba(30, 64, 175, 0.8) 0%, rgba(16, 185, 129, 0.6) 100%),
+                    url('imgs/hero_dog_2.jpg') center/cover;
+        color: white;
         text-align: center;
-        overflow: hidden;
       }
 
       .hero::before {
@@ -375,17 +386,17 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background: linear-gradient(135deg, rgba(30, 64, 175, 0.8) 0%, rgba(17, 24, 39, 0.6) 100%),
-                    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect width="1200" height="800" fill="%23DBEAFE"/><circle cx="200" cy="150" r="80" fill="%23E0F2FE" opacity="0.7"/><circle cx="800" cy="300" r="120" fill="%23BAE6FD" opacity="0.5"/><circle cx="1000" cy="600" r="100" fill="%23DBEAFE" opacity="0.6"/></svg>');
-        background-size: cover;
-        background-position: center;
-        z-index: -1;
+        background: linear-gradient(135deg, 
+          rgba(30, 64, 175, 0.7) 0%, 
+          rgba(16, 185, 129, 0.5) 50%, 
+          rgba(245, 158, 11, 0.3) 100%);
+        z-index: 0;
       }
 
       .hero__content {
         position: relative;
         z-index: 1;
-        max-width: 800px;
+        max-width: 900px;
         margin: 0 auto;
         padding: 0 var(--space-sm);
       }
@@ -394,13 +405,15 @@
         color: var(--color-bg-surface);
         margin-bottom: var(--space-sm);
         text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        animation: fadeInUp 1s ease-out;
       }
 
       .hero__subtitle {
         color: var(--color-primary-100);
         margin-bottom: var(--space-xl);
-        font-size: clamp(1.125rem, 2.5vw, 1.25rem);
+        font-size: clamp(1.125rem, 2.5vw, 1.5rem);
         text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        animation: fadeInUp 1s ease-out 0.2s both;
       }
 
       .hero__cta {
@@ -408,6 +421,34 @@
         flex-direction: column;
         gap: var(--space-sm);
         align-items: center;
+        animation: fadeInUp 1s ease-out 0.4s both;
+      }
+
+      .hero__badges {
+        display: flex;
+        justify-content: center;
+        gap: var(--space-sm);
+        margin-top: var(--space-lg);
+        flex-wrap: wrap;
+        animation: fadeInUp 1s ease-out 0.6s both;
+      }
+
+      .hero__badge {
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        padding: var(--space-xs) var(--space-sm);
+        border-radius: var(--radius-xl);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        font-size: 0.875rem;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: var(--space-xs);
+      }
+
+      .hero__badge-icon {
+        width: 16px;
+        height: 16px;
       }
 
       @media (min-width: 768px) {
@@ -418,89 +459,218 @@
       }
 
       /* ===============================================
-         GRIDS Y LAYOUTS
+         BOTONES
+         =============================================== */
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--space-xs);
+        padding: var(--space-sm) var(--space-lg);
+        border: none;
+        border-radius: var(--radius-md);
+        font-size: 1rem;
+        font-weight: 600;
+        font-family: inherit;
+        text-decoration: none;
+        cursor: pointer;
+        transition: var(--transition-bounce);
+        position: relative;
+        overflow: hidden;
+        min-height: 48px;
+        white-space: nowrap;
+      }
+
+      .btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: left 0.5s;
+      }
+
+      .btn:hover::before {
+        left: 100%;
+      }
+
+      .btn--primary {
+        background: linear-gradient(135deg, var(--color-primary-500) 0%, var(--color-primary-700) 100%);
+        color: white;
+        box-shadow: var(--shadow-colorful);
+      }
+
+      .btn--primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 24px rgba(30, 64, 175, 0.3);
+      }
+
+      .btn--accent {
+        background: linear-gradient(135deg, var(--color-accent-500) 0%, var(--color-accent-400) 100%);
+        color: white;
+      }
+
+      .btn--accent:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 24px rgba(245, 158, 11, 0.3);
+      }
+
+      .btn--secondary {
+        background: var(--color-bg-surface);
+        color: var(--color-primary-500);
+        border: 2px solid var(--color-primary-500);
+      }
+
+      .btn--secondary:hover {
+        background: var(--color-primary-500);
+        color: white;
+        transform: translateY(-2px);
+      }
+
+      .btn--large {
+        padding: var(--space-md) var(--space-xl);
+        font-size: 1.125rem;
+      }
+
+      .btn--small {
+        padding: var(--space-xs) var(--space-sm);
+        font-size: 0.875rem;
+      }
+
+      .btn--full {
+        width: 100%;
+      }
+
+      /* ===============================================
+         GRIDS
          =============================================== */
 
       .grid {
         display: grid;
-        gap: var(--space-md);
+        gap: var(--space-lg);
       }
 
-      .grid--2 {
-        grid-template-columns: 1fr;
-      }
+      .grid--1 { grid-template-columns: 1fr; }
+      .grid--2 { grid-template-columns: repeat(2, 1fr); }
+      .grid--3 { grid-template-columns: repeat(3, 1fr); }
+      .grid--4 { grid-template-columns: repeat(4, 1fr); }
 
-      .grid--3 {
-        grid-template-columns: 1fr;
-      }
-
-      .grid--4 {
-        grid-template-columns: 1fr;
-      }
-
-      @media (min-width: 768px) {
-        .grid--2 {
-          grid-template-columns: repeat(2, 1fr);
-        }
-        
-        .grid--3 {
-          grid-template-columns: repeat(2, 1fr);
-        }
-      }
-
-      @media (min-width: 1024px) {
-        .grid--3 {
-          grid-template-columns: repeat(3, 1fr);
-        }
-        
+      @media (max-width: 767px) {
+        .grid--2,
+        .grid--3,
         .grid--4 {
-          grid-template-columns: repeat(4, 1fr);
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (min-width: 768px) and (max-width: 1023px) {
+        .grid--4 {
+          grid-template-columns: repeat(2, 1fr);
         }
       }
 
       /* ===============================================
-         CARDS
+         TARJETAS
          =============================================== */
 
       .card {
-        background-color: var(--color-bg-surface);
+        background: var(--color-bg-surface);
         border-radius: var(--radius-lg);
         padding: var(--space-lg);
         box-shadow: var(--shadow-md);
         transition: var(--transition-card);
-        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, var(--color-primary-500), var(--color-accent-500));
+        transform: scaleX(0);
+        transition: var(--transition-base);
       }
 
       .card:hover {
-        box-shadow: var(--shadow-lg);
         transform: translateY(-8px);
+        box-shadow: var(--shadow-xl);
+      }
+
+      .card:hover::before {
+        transform: scaleX(1);
       }
 
       .card--service {
         text-align: center;
+        position: relative;
+        background: linear-gradient(135deg, var(--color-bg-surface) 0%, #F8FAFC 100%);
+        border: 1px solid rgba(30, 64, 175, 0.05);
+      }
+
+      .card--service::after {
+        content: '';
+        position: absolute;
+        bottom: -50%;
+        right: -50%;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle, rgba(245, 158, 11, 0.1) 0%, transparent 70%);
+        border-radius: 50%;
+        transition: var(--transition-base);
+        z-index: 0;
+      }
+
+      .card--service:hover::after {
+        bottom: -30%;
+        right: -30%;
       }
 
       .card__icon {
         width: 64px;
         height: 64px;
-        margin: 0 auto var(--space-sm);
+        margin: 0 auto var(--space-md);
         color: var(--color-primary-500);
         transition: var(--transition-base);
       }
 
-      .card:hover .card__icon {
-        color: var(--color-secondary-500);
-        transform: scale(1.1);
+      .card--service:hover .card__icon {
+        transform: scale(1.1) rotate(5deg);
+        color: var(--color-accent-500);
       }
 
       .card__title {
-        margin-bottom: var(--space-xs);
+        margin-bottom: var(--space-sm);
+        color: var(--color-text-primary);
+        position: relative;
+        z-index: 1;
       }
 
       .card__description {
-        color: var(--color-text-secondary);
-        font-size: 0.875rem;
+        font-size: 0.9375rem;
         line-height: 1.6;
+        margin-bottom: 0;
+        position: relative;
+        z-index: 1;
+      }
+
+      .card__image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: var(--radius-md);
+        margin-bottom: var(--space-md);
+        transition: var(--transition-base);
+      }
+
+      .card--service:hover .card__image {
+        transform: scale(1.05);
       }
 
       /* ===============================================
@@ -508,44 +678,191 @@
          =============================================== */
 
       .badge {
-        display: inline-flex;
-        align-items: center;
-        gap: var(--space-xs);
+        display: inline-block;
         padding: var(--space-xs) var(--space-sm);
-        background-color: var(--color-accent-500);
-        color: var(--color-bg-surface);
+        border-radius: var(--radius-xl);
         font-size: 0.75rem;
         font-weight: 600;
-        border-radius: 20px;
         text-transform: uppercase;
-        letter-spacing: 0.05em;
+        letter-spacing: 0.5px;
+        position: relative;
+        overflow: hidden;
       }
 
-      .badge--success {
-        background-color: var(--color-success);
+      .badge::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        transition: left 0.5s;
+      }
+
+      .badge:hover::before {
+        left: 100%;
       }
 
       .badge--primary {
-        background-color: var(--color-primary-500);
+        background: linear-gradient(135deg, var(--color-primary-500) 0%, var(--color-primary-700) 100%);
+        color: white;
       }
 
+      .badge--accent {
+        background: linear-gradient(135deg, var(--color-accent-500) 0%, var(--color-accent-400) 100%);
+        color: white;
+      }
+
+      .badge--success {
+        background: linear-gradient(135deg, var(--color-success) 0%, #059669 100%);
+        color: white;
+      }
+
+      .mb-sm { margin-bottom: var(--space-sm); }
+      .mb-md { margin-bottom: var(--space-md); }
+      .mb-lg { margin-bottom: var(--space-lg); }
+      .mb-xl { margin-bottom: var(--space-xl); }
+
+      .mt-sm { margin-top: var(--space-sm); }
+      .mt-md { margin-top: var(--space-md); }
+      .mt-lg { margin-top: var(--space-lg); }
+      .mt-xl { margin-top: var(--space-xl); }
+
       /* ===============================================
-         SECCIONES ESPECÍFICAS
+         SERVICIOS MEJORADOS
          =============================================== */
+
+      .services {
+        background: linear-gradient(135deg, #F8FAFC 0%, #E2E8F0 100%);
+      }
 
       .services__header {
         text-align: center;
         margin-bottom: var(--space-xl);
       }
 
+      .services__header h2 {
+        background: linear-gradient(135deg, var(--color-primary-500) 0%, var(--color-accent-500) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: var(--space-md);
+      }
+
+      .service-card {
+        background: var(--color-bg-surface);
+        border-radius: var(--radius-lg);
+        padding: var(--space-xl);
+        text-align: center;
+        box-shadow: var(--shadow-lg);
+        transition: var(--transition-card);
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(30, 64, 175, 0.05);
+      }
+
+      .service-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 6px;
+        background: linear-gradient(90deg, var(--color-primary-500), var(--color-accent-500), var(--color-secondary-500));
+        transform: scaleX(0);
+        transition: var(--transition-base);
+      }
+
+      .service-card:hover::before {
+        transform: scaleX(1);
+      }
+
+      .service-card:hover {
+        transform: translateY(-12px) scale(1.02);
+        box-shadow: 0 25px 50px rgba(30, 64, 175, 0.15);
+      }
+
+      .service-card__image {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        border-radius: var(--radius-md);
+        margin-bottom: var(--space-md);
+        transition: var(--transition-base);
+      }
+
+      .service-card:hover .service-card__image {
+        transform: scale(1.1);
+      }
+
+      .service-card__icon {
+        width: 72px;
+        height: 72px;
+        margin: 0 auto var(--space-md);
+        transition: var(--transition-base);
+        filter: drop-shadow(0 4px 8px rgba(30, 64, 175, 0.2));
+      }
+
+      .service-card:hover .service-card__icon {
+        transform: scale(1.1) rotate(10deg);
+      }
+
+      .service-card__title {
+        margin-bottom: var(--space-sm);
+        background: linear-gradient(135deg, var(--color-primary-500) 0%, var(--color-text-primary) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .service-card__description {
+        font-size: 0.9375rem;
+        line-height: 1.6;
+        color: var(--color-text-secondary);
+      }
+
+      .service-card__badge {
+        position: absolute;
+        top: var(--space-sm);
+        right: var(--space-sm);
+        background: linear-gradient(135deg, var(--color-accent-500) 0%, var(--color-accent-400) 100%);
+        color: white;
+        padding: var(--space-xs) var(--space-sm);
+        border-radius: var(--radius-xl);
+        font-size: 0.75rem;
+        font-weight: 600;
+        box-shadow: var(--shadow-md);
+      }
+
+      /* ===============================================
+         SECCIÓN ABOUT
+         =============================================== */
+
       .about {
-        background-color: var(--color-bg-surface);
+        background: linear-gradient(135deg, #FFFFFF 0%, #F7FAFC 100%);
+        position: relative;
+      }
+
+      .about::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 300px;
+        height: 300px;
+        background: url('imgs/pets_group_5.jpg') center/cover;
+        border-radius: 50%;
+        opacity: 0.1;
+        z-index: 0;
       }
 
       .about__container {
         display: grid;
         gap: var(--space-xl);
         align-items: center;
+        position: relative;
+        z-index: 1;
       }
 
       .about__content {
@@ -554,15 +871,56 @@
 
       .about__image {
         order: 1;
-        border-radius: var(--radius-lg);
-        overflow: hidden;
-        box-shadow: var(--shadow-lg);
+        position: relative;
       }
 
-      .about__image img {
+      .about__image-main {
         width: 100%;
-        height: auto;
-        display: block;
+        height: 500px;
+        object-fit: cover;
+        border-radius: var(--radius-xl);
+        box-shadow: var(--shadow-xl);
+        transition: var(--transition-base);
+      }
+
+      .about__image-main:hover {
+        transform: scale(1.02);
+      }
+
+      .about__floating-image {
+        position: absolute;
+        bottom: -20px;
+        right: -20px;
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid var(--color-bg-surface);
+        box-shadow: var(--shadow-lg);
+        animation: float 3s ease-in-out infinite;
+      }
+
+      .about__benefits {
+        margin: var(--space-xl) 0;
+      }
+
+      .about__benefit {
+        display: flex;
+        align-items: center;
+        gap: var(--space-sm);
+        padding: var(--space-sm) 0;
+        border-bottom: 1px solid rgba(30, 64, 175, 0.05);
+      }
+
+      .about__benefit:last-child {
+        border-bottom: none;
+      }
+
+      .about__benefit-icon {
+        width: 24px;
+        height: 24px;
+        color: var(--color-success);
+        flex-shrink: 0;
       }
 
       .about__stats {
@@ -570,20 +928,53 @@
         grid-template-columns: repeat(2, 1fr);
         gap: var(--space-md);
         margin-top: var(--space-xl);
+        padding: var(--space-lg);
+        background: linear-gradient(135deg, rgba(30, 64, 175, 0.05) 0%, rgba(245, 158, 11, 0.05) 100%);
+        border-radius: var(--radius-lg);
+        border: 1px solid rgba(30, 64, 175, 0.1);
       }
 
       .about__stat {
         text-align: center;
         padding: var(--space-md);
-        background-color: var(--color-primary-100);
+        background: var(--color-bg-surface);
         border-radius: var(--radius-md);
+        box-shadow: var(--shadow-sm);
+        transition: var(--transition-base);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .about__stat::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--color-primary-500), var(--color-accent-500));
+        transform: scaleX(0);
+        transition: var(--transition-base);
+      }
+
+      .about__stat:hover::before {
+        transform: scaleX(1);
+      }
+
+      .about__stat:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-lg);
       }
 
       .about__stat-number {
-        font-size: 2rem;
-        font-weight: 700;
-        color: var(--color-primary-500);
         display: block;
+        font-size: 2.5rem;
+        font-weight: 700;
+        background: linear-gradient(135deg, var(--color-primary-500) 0%, var(--color-accent-500) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: var(--space-xs);
       }
 
       .about__stat-label {
@@ -592,7 +983,7 @@
         font-weight: 500;
       }
 
-      @media (min-width: 1024px) {
+      @media (min-width: 768px) {
         .about__container {
           grid-template-columns: 1fr 1fr;
         }
@@ -610,14 +1001,25 @@
         }
       }
 
+      /* ===============================================
+         TESTIMONIOS
+         =============================================== */
+
       .testimonials__header {
         text-align: center;
         margin-bottom: var(--space-xl);
       }
 
+      .testimonials__header h2 {
+        background: linear-gradient(135deg, var(--color-primary-500) 0%, var(--color-accent-500) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
       .testimonials__container {
         position: relative;
-        max-width: 800px;
+        max-width: 900px;
         margin: 0 auto;
       }
 
@@ -626,12 +1028,29 @@
       }
 
       .testimonial__card {
-        background-color: var(--color-bg-surface);
-        border-radius: var(--radius-lg);
+        background: linear-gradient(135deg, var(--color-bg-surface) 0%, #F8FAFC 100%);
+        border-radius: var(--radius-xl);
         padding: var(--space-xl);
         box-shadow: var(--shadow-lg);
         margin-bottom: var(--space-md);
         position: relative;
+        border: 1px solid rgba(30, 64, 175, 0.05);
+        transition: var(--transition-base);
+      }
+
+      .testimonial__card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, var(--color-primary-500), var(--color-accent-500), var(--color-secondary-500));
+      }
+
+      .testimonial__card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-xl);
       }
 
       .testimonial__quote {
@@ -639,19 +1058,26 @@
         height: 48px;
         margin: 0 auto var(--space-md);
         color: var(--color-primary-100);
+        background: linear-gradient(135deg, var(--color-primary-500) 0%, var(--color-accent-500) 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
 
       .testimonial__text {
         font-style: italic;
         font-size: 1.125rem;
-        margin-bottom: var(--space-md);
+        margin-bottom: var(--space-lg);
         line-height: 1.6;
+        color: var(--color-text-primary);
       }
 
       .testimonial__author {
         font-weight: 600;
         color: var(--color-text-primary);
         margin-bottom: var(--space-xs);
+        font-size: 1.125rem;
       }
 
       .testimonial__author-info {
@@ -670,12 +1096,14 @@
         width: 20px;
         height: 20px;
         fill: var(--color-accent-500);
+        filter: drop-shadow(0 2px 4px rgba(245, 158, 11, 0.3));
       }
 
       .testimonials__controls {
         display: flex;
         justify-content: center;
         gap: var(--space-sm);
+        margin-top: var(--space-lg);
       }
 
       .testimonials__control {
@@ -689,20 +1117,42 @@
       }
 
       .testimonials__control.active {
-        background-color: var(--color-primary-500);
+        background: linear-gradient(135deg, var(--color-primary-500) 0%, var(--color-accent-500) 100%);
+        transform: scale(1.2);
       }
 
       .testimonials__control:hover {
-        background-color: var(--color-primary-700);
+        background: var(--color-primary-500);
+        transform: scale(1.1);
       }
 
+      /* ===============================================
+         CONTACTO
+         =============================================== */
+
       .contact {
-        background-color: var(--color-bg-surface);
+        background: linear-gradient(135deg, #F8FAFC 0%, #E2E8F0 100%);
+        position: relative;
+      }
+
+      .contact::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 200px;
+        height: 200px;
+        background: url('imgs/cat_care_9.jpg') center/cover;
+        border-radius: 50%;
+        opacity: 0.08;
+        z-index: 0;
       }
 
       .contact__container {
         display: grid;
         gap: var(--space-xl);
+        position: relative;
+        z-index: 1;
       }
 
       .contact__info {
@@ -718,6 +1168,16 @@
         align-items: center;
         gap: var(--space-sm);
         margin-bottom: var(--space-md);
+        padding: var(--space-sm);
+        background: var(--color-bg-surface);
+        border-radius: var(--radius-md);
+        box-shadow: var(--shadow-sm);
+        transition: var(--transition-base);
+      }
+
+      .contact__info-item:hover {
+        transform: translateX(4px);
+        box-shadow: var(--shadow-md);
       }
 
       .contact__info-icon {
@@ -725,6 +1185,37 @@
         height: 24px;
         color: var(--color-primary-500);
         flex-shrink: 0;
+      }
+
+      .contact__map {
+        width: 100%;
+        height: 300px;
+        background: var(--color-bg-surface);
+        border-radius: var(--radius-lg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: var(--shadow-md);
+        margin-top: var(--space-lg);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .contact__map::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('imgs/clinic_interior_4.jpg') center/cover;
+        opacity: 0.3;
+      }
+
+      .contact__map-content {
+        position: relative;
+        z-index: 1;
+        text-align: center;
       }
 
       @media (min-width: 1024px) {
@@ -746,10 +1237,23 @@
          =============================================== */
 
       .form {
-        background-color: var(--color-bg-surface);
-        border-radius: var(--radius-lg);
+        background: linear-gradient(135deg, var(--color-bg-surface) 0%, #F8FAFC 100%);
+        border-radius: var(--radius-xl);
         padding: var(--space-xl);
-        box-shadow: var(--shadow-md);
+        box-shadow: var(--shadow-lg);
+        border: 1px solid rgba(30, 64, 175, 0.05);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .form::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 6px;
+        background: linear-gradient(90deg, var(--color-primary-500), var(--color-accent-500), var(--color-secondary-500));
       }
 
       .form__group {
@@ -759,7 +1263,7 @@
       .form__label {
         display: block;
         margin-bottom: var(--space-xs);
-        font-weight: 500;
+        font-weight: 600;
         color: var(--color-text-primary);
       }
 
@@ -768,9 +1272,9 @@
       .form__select {
         width: 100%;
         padding: var(--space-sm);
-        border: 1px solid #E5E7EB;
+        border: 2px solid #E5E7EB;
         border-radius: var(--radius-md);
-        background-color: var(--color-bg-page);
+        background: var(--color-bg-surface);
         font-size: 1rem;
         font-family: inherit;
         transition: var(--transition-base);
@@ -787,8 +1291,9 @@
       .form__select:focus {
         outline: none;
         border: 2px solid var(--color-primary-500);
-        box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.2);
-        background-color: var(--color-bg-surface);
+        box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+        background: var(--color-bg-surface);
+        transform: translateY(-2px);
       }
 
       .form__error {
@@ -796,31 +1301,15 @@
         font-size: 0.875rem;
         margin-top: var(--space-xs);
         display: none;
-      }
-
-      .form__error.active {
-        display: block;
-      }
-
-      .form__input.error,
-      .form__textarea.error,
-      .form__select.error {
-        border-color: var(--color-error);
+        animation: fadeInUp 0.3s ease-out;
       }
 
       .form__success {
-        background-color: var(--color-success);
-        color: var(--color-bg-surface);
-        padding: var(--space-md);
-        border-radius: var(--radius-md);
-        text-align: center;
-        font-weight: 500;
-        margin-top: var(--space-md);
+        color: var(--color-success);
+        font-size: 0.875rem;
+        margin-top: var(--space-xs);
         display: none;
-      }
-
-      .form__success.active {
-        display: block;
+        animation: fadeInUp 0.3s ease-out;
       }
 
       /* ===============================================
@@ -828,98 +1317,149 @@
          =============================================== */
 
       .footer {
-        background-color: var(--color-text-primary);
+        background: linear-gradient(135deg, var(--color-primary-700) 0%, var(--color-primary-500) 100%);
         color: var(--color-bg-surface);
-        padding: var(--space-xl) 0 var(--space-md);
+        padding: var(--space-xxl) 0 var(--space-md);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .footer::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('imgs/small_pets_8.jpg') center/cover;
+        opacity: 0.05;
+        z-index: 0;
       }
 
       .footer__container {
+        position: relative;
+        z-index: 1;
         display: grid;
         gap: var(--space-xl);
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       }
 
       .footer__section h3 {
         color: var(--color-bg-surface);
-        margin-bottom: var(--space-sm);
+        margin-bottom: var(--space-md);
+        font-size: 1.25rem;
       }
 
-      .footer__links {
+      .footer__section p,
+      .footer__section li {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 0.9375rem;
+        line-height: 1.6;
+      }
+
+      .footer__section ul {
         list-style: none;
+        padding: 0;
+        margin: 0;
       }
 
-      .footer__links li {
-        margin-bottom: var(--space-xs);
+      .footer__section a {
+        color: rgba(255, 255, 255, 0.8);
+        text-decoration: none;
+        transition: var(--transition-base);
+        padding: var(--space-xs) 0;
+        display: block;
       }
 
-      .footer__links a {
-        color: var(--color-text-secondary);
+      .footer__section a:hover {
+        color: var(--color-accent-500);
+        transform: translateX(4px);
+      }
+
+      .footer__logo {
+        display: flex;
+        align-items: center;
+        gap: var(--space-xs);
+        color: var(--color-bg-surface);
+        font-weight: 700;
+        font-size: 1.5rem;
+        margin-bottom: var(--space-md);
+        text-decoration: none;
+      }
+
+      .footer__logo-icon {
+        width: 32px;
+        height: 32px;
+        color: var(--color-accent-500);
+      }
+
+      .footer__social {
+        display: flex;
+        gap: var(--space-sm);
+        margin-top: var(--space-md);
+      }
+
+      .footer__social-link {
+        width: 40px;
+        height: 40px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--color-bg-surface);
         text-decoration: none;
         transition: var(--transition-base);
       }
 
-      .footer__links a:hover {
-        color: var(--color-primary-100);
+      .footer__social-link:hover {
+        background: var(--color-accent-500);
+        transform: translateY(-2px);
       }
 
       .footer__bottom {
-        border-top: 1px solid #374151;
-        padding-top: var(--space-md);
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
         margin-top: var(--space-xl);
+        padding-top: var(--space-md);
         text-align: center;
-        color: var(--color-text-secondary);
       }
 
-      .footer__bottom a {
-        color: var(--color-primary-100);
-        text-decoration: none;
-      }
-
-      @media (min-width: 768px) {
-        .footer__container {
-          grid-template-columns: repeat(3, 1fr);
-        }
+      .footer__bottom p {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.875rem;
+        margin: 0;
       }
 
       /* ===============================================
          UTILIDADES
          =============================================== */
 
-      .text-center { text-align: center; }
-      .text-left { text-align: left; }
-      .text-right { text-align: right; }
-
-      .mb-0 { margin-bottom: 0; }
-      .mb-sm { margin-bottom: var(--space-sm); }
-      .mb-md { margin-bottom: var(--space-md); }
-      .mb-lg { margin-bottom: var(--space-lg); }
-      .mb-xl { margin-bottom: var(--space-xl); }
-
-      .mt-0 { margin-top: 0; }
-      .mt-sm { margin-top: var(--space-sm); }
-      .mt-md { margin-top: var(--space-md); }
-      .mt-lg { margin-top: var(--space-lg); }
-      .mt-xl { margin-top: var(--space-xl); }
-
-      .hidden { display: none; }
-      .visible { display: block; }
-
-      /* ===============================================
-         ANIMACIONES
-         =============================================== */
-
-      @keyframes fadeInUp {
-        from {
-          opacity: 0;
-          transform: translateY(30px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
       }
 
-      .animate-fade-in-up {
-        animation: fadeInUp 0.6s ease-out;
+      .skip-link {
+        position: absolute;
+        top: -40px;
+        left: 6px;
+        background: var(--color-primary-500);
+        color: white;
+        padding: 8px;
+        text-decoration: none;
+        border-radius: 4px;
+        z-index: 10000;
+      }
+
+      .skip-link:focus {
+        top: 6px;
       }
 
       /* ===============================================
@@ -927,56 +1467,68 @@
          =============================================== */
 
       @media (max-width: 767px) {
-        .hero {
-          min-height: 500px;
-        }
-        
-        .btn--large {
-          width: 100%;
-          max-width: 300px;
-        }
-        
         .section {
-          padding: var(--space-xxl) 0;
+          padding: var(--space-xl) 0;
+        }
+        
+        .hero__title {
+          font-size: 2rem;
+        }
+        
+        .hero__subtitle {
+          font-size: 1rem;
+        }
+        
+        .hero__badges {
+          flex-direction: column;
+          align-items: center;
         }
         
         .about__stats {
-          grid-template-columns: repeat(2, 1fr);
+          grid-template-columns: 1fr 1fr;
+          gap: var(--space-sm);
+        }
+        
+        .about__stat-number {
+          font-size: 2rem;
+        }
+        
+        .contact__map {
+          height: 200px;
         }
       }
 
       @media (max-width: 480px) {
         .container {
-          padding: 0 var(--space-sm);
+          padding: 0 var(--space-xs);
         }
         
-        .card {
-          padding: var(--space-md);
+        .btn {
+          padding: var(--space-sm);
+          font-size: 0.875rem;
         }
         
-        .form {
-          padding: var(--space-md);
+        .about__stats {
+          grid-template-columns: 1fr;
         }
       }
     </style>
   </head>
   <body>
-    <header class="header">
+    <!-- Skip Link for Accessibility -->
+    <a href="#main" class="skip-link">Saltar al contenido principal</a>
+
+    <!-- Header -->
+    <header class="header" id="header">
       <div class="container">
         <div class="header__container">
-          <!-- Logo -->
           <a href="#inicio" class="header__logo" onclick="scrollToSection('inicio')">
-            <svg class="header__logo-icon" viewBox="0 0 32 32" fill="currentColor">
-              <ellipse cx="16" cy="20" rx="8" ry="5" />
-              <ellipse cx="12" cy="10" rx="3" ry="3.5" />
-              <ellipse cx="16" cy="8" rx="3" ry="3.5" />
-              <ellipse cx="20" cy="10" rx="3" ry="3.5" />
-              <ellipse cx="24" cy="13" rx="3" ry="3.5" />
+            <svg class="header__logo-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12.5 2C10.57 2 9 3.57 9 5.5c0 1.93 1.57 3.5 3.5 3.5s3.5-1.57 3.5-3.5C16 3.57 14.43 2 12.5 2zM7.5 6C5.57 6 4 7.57 4 9.5S5.57 13 7.5 13 11 11.43 11 9.5 9.43 6 7.5 6zM16.5 6C14.57 6 13 7.57 13 9.5S14.57 13 16.5 13 20 11.43 20 9.5 18.43 6 16.5 6zM6 14.5C4.57 14.5 3.5 15.57 3.5 17S4.57 19.5 6 19.5 8.5 18.43 8.5 17 7.43 14.5 6 14.5zM18 14.5C16.57 14.5 15.5 15.57 15.5 17S16.57 19.5 18 19.5 20.5 18.43 20.5 17 19.43 14.5 18 14.5zM8.5 18.5C7.67 18.5 7 19.17 7 20s.67 1.5 1.5 1.5S10 20.83 10 20 9.33 18.5 8.5 18.5zM15.5 18.5C14.67 18.5 14 19.17 14 20s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5z"/>
             </svg>
-            <span class="header__logo-text">Veterinaria CanOn</span>
+            Veterinaria CanOn
           </a>
-
-          <!-- Navegación Desktop -->
+          
           <nav class="header__nav" aria-label="Navegación principal">
             <ul class="header__nav-list">
               <li><a href="#inicio" class="header__nav-link" onclick="scrollToSection('inicio')">Inicio</a></li>
@@ -986,19 +1538,24 @@
               <li><a href="#contacto" class="header__nav-link" onclick="scrollToSection('contacto')">Contacto</a></li>
             </ul>
           </nav>
-
-          <!-- Botón menú móvil -->
-          <button class="header__mobile-toggle" onclick="toggleMobileMenu()" aria-label="Abrir menú de navegación">
-            <span></span>
-            <span></span>
-            <span></span>
+          
+          <div class="header__cta">
+            <a href="tel:+1234567890" class="btn btn--accent btn--small">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+              </svg>
+              Llamar
+            </a>
+          </div>
+          
+          <button class="header__mobile-btn" onclick="toggleMobileMenu()" aria-label="Menú de navegación">
+            <span id="mobile-menu-icon">☰</span>
           </button>
         </div>
-
-        <!-- Menú móvil -->
-        <div class="header__mobile-menu" id="mobileMenu">
+        
+        <div class="header__mobile-menu" id="mobile-menu">
           <nav aria-label="Navegación móvil">
-            <ul class="header__mobile-nav">
+            <ul class="header__mobile-nav-list">
               <li><a href="#inicio" onclick="scrollToSection('inicio'); toggleMobileMenu()">Inicio</a></li>
               <li><a href="#servicios" onclick="scrollToSection('servicios'); toggleMobileMenu()">Servicios</a></li>
               <li><a href="#nosotros" onclick="scrollToSection('nosotros'); toggleMobileMenu()">Nosotros</a></li>
@@ -1010,79 +1567,135 @@
       </div>
     </header>
 
-    <main>
+    <!-- Main Content -->
+    <main id="main">
       <!-- Hero Section -->
       <section id="inicio" class="hero">
-        <div class="hero__content">
-          <h1 class="hero__title">
-            Cuidado Experto para tu Mejor Amigo
-          </h1>
-          <p class="hero__subtitle">
-            Medicina veterinaria de calidad con corazón. Más de 15 años cuidando la salud y felicidad de tus mascotas.
-          </p>
-          <div class="hero__cta">
-            <button class="btn btn--primary btn--large" onclick="scrollToSection('contacto')">
-              Agendar Cita
-            </button>
-            <a href="tel:+1234567890" class="btn btn--accent btn--large">
-              Llamar Ahora
-            </a>
+        <div class="container">
+          <div class="hero__content">
+            <h1 class="hero__title animate-fadeInUp">
+              Cuidado Experto para tu Mejor Amigo
+            </h1>
+            <p class="hero__subtitle">
+              Medicina veterinaria de calidad con corazón. Más de 15 años cuidando la salud y felicidad de tus mascotas.
+            </p>
+            <div class="hero__cta">
+              <button class="btn btn--primary btn--large animate-fadeInUp" onclick="scrollToSection('contacto')">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1 11h-4v4h-4v-4H6v-4h4V6h4v4h4v4z"/>
+                </svg>
+                Agendar Cita
+              </button>
+              <a href="tel:+1234567890" class="btn btn--accent btn--large animate-fadeInUp">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                </svg>
+                Llamar Ahora
+              </a>
+            </div>
+            <div class="hero__badges">
+              <div class="hero__badge">
+                <svg class="hero__badge-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+                15+ Años de Experiencia
+              </div>
+              <div class="hero__badge">
+                <svg class="hero__badge-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12.5 2C10.57 2 9 3.57 9 5.5c0 1.93 1.57 3.5 3.5 3.5s3.5-1.57 3.5-3.5C16 3.57 14.43 2 12.5 2zM7.5 6C5.57 6 4 7.57 4 9.5S5.57 13 7.5 13 11 11.43 11 9.5 9.43 6 7.5 6zM16.5 6C14.57 6 13 7.57 13 9.5S14.57 13 16.5 13 20 11.43 20 9.5 18.43 6 16.5 6z"/>
+                </svg>
+                5000+ Mascotas Atendidas
+              </div>
+              <div class="hero__badge">
+                <svg class="hero__badge-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                </svg>
+                98% Satisfacción
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       <!-- Services Section -->
-      <section id="servicios" class="section">
+      <section id="servicios" class="section services">
         <div class="container">
           <div class="services__header">
             <h2>Nuestros Servicios Veterinarios</h2>
             <p class="text-center">
-              Ofrecemos atención integral para todas las necesidades de salud de tu mascota
+              Ofrecemos atención integral para todas las necesidades de salud de tu mascota con el mejor cuidado profesional
             </p>
           </div>
           
           <div class="grid grid--4">
             <!-- Consulta -->
-            <div class="card card--service">
-              <svg class="card__icon" viewBox="0 0 24 24" fill="currentColor">
+            <div class="service-card">
+              <div class="service-card__badge">Popular</div>
+              <img src="imgs/hero_dog_4.jpg" alt="Consulta general veterinaria" class="service-card__image">
+              <svg class="service-card__icon" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
               </svg>
-              <h3 class="card__title">Consulta General</h3>
-              <p class="card__description">Exámenes completos, diagnósticos precisos y planes de tratamiento personalizados para mantener a tu mascota saludable.</p>
+              <h3 class="service-card__title">Consulta General</h3>
+              <p class="service-card__description">Exámenes completos, diagnósticos precisos y planes de tratamiento personalizados para mantener a tu mascota saludable y feliz.</p>
             </div>
 
             <!-- Urgencias -->
-            <div class="card card--service">
-              <span class="badge badge--primary mb-sm">24/7</span>
-              <svg class="card__icon" viewBox="0 0 24 24" fill="currentColor">
+            <div class="service-card">
+              <div class="service-card__badge">24/7</div>
+              <img src="imgs/vet_care_4.jpg" alt="Urgencias veterinarias" class="service-card__image">
+              <svg class="service-card__icon" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
               </svg>
-              <h3 class="card__title">Urgencias 24/7</h3>
-              <p class="card__description">Servicio de emergencias veterinarias disponible las 24 horas para atender cualquier situación crítica.</p>
+              <h3 class="service-card__title">Urgencias 24/7</h3>
+              <p class="service-card__description">Servicio de emergencias veterinarias disponible las 24 horas para atender cualquier situación crítica con rapidez y profesionalismo.</p>
             </div>
 
             <!-- Vacunación -->
-            <div class="card card--service">
-              <span class="badge badge--primary mb-sm">Importante</span>
-              <svg class="card__icon" viewBox="0 0 24 24" fill="currentColor">
+            <div class="service-card">
+              <div class="service-card__badge">Importante</div>
+              <img src="imgs/cat_care_9.jpg" alt="Vacunación de mascotas" class="service-card__image">
+              <svg class="service-card__icon" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1 11h-4v4h-4v-4H6v-4h4V6h4v4h4v4z"/>
               </svg>
-              <h3 class="card__title">Vacunación</h3>
-              <p class="card__description">Programas completos de vacunación y desparasitación para prevenir enfermedades y mantener la salud óptima.</p>
+              <h3 class="service-card__title">Vacunación</h3>
+              <p class="service-card__description">Programas completos de vacunación y desparasitación para prevenir enfermedades y mantener la salud óptima de tu compañero.</p>
             </div>
 
             <!-- Cirugía -->
-            <div class="card card--service">
-              <svg class="card__icon" viewBox="0 0 24 24" fill="currentColor">
+            <div class="service-card">
+              <div class="service-card__badge">Especializado</div>
+              <img src="imgs/vet_care_8.jpg" alt="Cirugía veterinaria" class="service-card__image">
+              <svg class="service-card__icon" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M17 2H7c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 16H8V4h8v14zm-1-2V6h-2v2h-2v2h2v2h2v-2h2V8h-2z"/>
               </svg>
-              <h3 class="card__title">Cirugía</h3>
-              <p class="card__description">Procedimientos quirúrgicos especializados con equipos modernos y protocolo de seguridad avanzado.</p>
+              <h3 class="service-card__title">Cirugía</h3>
+              <p class="service-card__description">Procedimientos quirúrgicos especializados con equipos modernos y protocolo de seguridad avanzado para garantizar el mejor cuidado.</p>
+            </div>
+          </div>
+
+          <!-- Servicios adicionales -->
+          <div class="grid grid--2 mt-xl">
+            <div class="service-card">
+              <img src="imgs/pets_group_0.jpg" alt="Dental veterinaria" class="service-card__image">
+              <svg class="service-card__icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+              </svg>
+              <h3 class="service-card__title">Cuidado Dental</h3>
+              <p class="service-card__description">Limpieza dental profesional y tratamientos especializados para mantener la salud bucal de tu mascota en perfectas condiciones.</p>
+            </div>
+
+            <div class="service-card">
+              <img src="imgs/small_pets_7.jpg" alt="Grooming y estética" class="service-card__image">
+              <svg class="service-card__icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+              </svg>
+              <h3 class="service-card__title">Grooming & Estética</h3>
+              <p class="service-card__description">Servicios de peluquería y estética para que tu mascota se vea y se sienta espectacular, con productos especiales y cuidado gentil.</p>
             </div>
           </div>
 
           <div class="text-center mt-xl">
-            <button class="btn btn--primary" onclick="scrollToSection('contacto')">
+            <button class="btn btn--primary btn--large" onclick="scrollToSection('contacto')">
               Consulta Personalizada
             </button>
           </div>
@@ -1113,40 +1726,40 @@
                 <h3 class="mb-md">Lo que nos hace especiales:</h3>
                 <div class="grid grid--2">
                   <div class="about__benefit">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="color: var(--color-success);">
+                    <svg class="about__benefit-icon" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
                     </svg>
-                    <span style="margin-left: 8px;">Atención personalizada y cálida</span>
+                    <span>Atención personalizada y cálida</span>
                   </div>
                   <div class="about__benefit">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="color: var(--color-success);">
+                    <svg class="about__benefit-icon" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
                     </svg>
-                    <span style="margin-left: 8px;">Tecnología veterinaria avanzada</span>
+                    <span>Tecnología veterinaria avanzada</span>
                   </div>
                   <div class="about__benefit">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="color: var(--color-success);">
+                    <svg class="about__benefit-icon" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
                     </svg>
-                    <span style="margin-left: 8px;">Equipo médico especializado</span>
+                    <span>Equipo médico especializado</span>
                   </div>
                   <div class="about__benefit">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="color: var(--color-success);">
+                    <svg class="about__benefit-icon" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
                     </svg>
-                    <span style="margin-left: 8px;">Horarios flexibles de atención</span>
+                    <span>Horarios flexibles de atención</span>
                   </div>
                   <div class="about__benefit">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="color: var(--color-success);">
+                    <svg class="about__benefit-icon" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
                     </svg>
-                    <span style="margin-left: 8px;">Seguimiento post-consulta</span>
+                    <span>Seguimiento post-consulta</span>
                   </div>
                   <div class="about__benefit">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="color: var(--color-success);">
+                    <svg class="about__benefit-icon" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
                     </svg>
-                    <span style="margin-left: 8px;">Emergencias 24/7</span>
+                    <span>Emergencias 24/7</span>
                   </div>
                 </div>
               </div>
@@ -1172,9 +1785,10 @@
               </div>
             </div>
 
-            <!-- Imagen -->
+            <!-- Imagen principal con imagen flotante -->
             <div class="about__image">
-              <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 400'><rect width='600' height='400' fill='%23DBEAFE'/><circle cx='300' cy='200' r='80' fill='%231E40AF' opacity='0.7'/><rect x='250' y='300' width='100' height='60' fill='%231E3A8A' opacity='0.8'/><text x='300' y='210' text-anchor='middle' fill='white' font-size='24' font-weight='bold'>VETERINARIOS</text><text x='300' y='240' text-anchor='middle' fill='white' font-size='16'>PROFESIONALES</text></svg>" alt="Veterinarios profesionales de CanOn">
+              <img src="imgs/clinic_interior_4.jpg" alt="Veterinarios profesionales de CanOn en acción" class="about__image-main">
+              <img src="imgs/pets_group_4.jpg" alt="Mascotas felices" class="about__floating-image">
             </div>
           </div>
         </div>
@@ -1186,155 +1800,152 @@
           <div class="testimonials__header">
             <h2>Lo Que Dicen Nuestros Clientes</h2>
             <p class="text-center">
-              Miles de familias confían en nosotros para el cuidado de sus mascotas
+              La satisfacción de nuestros clientes y sus mascotas es nuestra mayor recompensa
             </p>
           </div>
-
+          
           <div class="testimonials__container">
-            <!-- Carrusel de testimonios -->
-            <div class="testimonial">
+            <div class="testimonial" id="testimonial">
               <div class="testimonial__card">
-                <!-- Comillas -->
-                <svg class="testimonial__quote" viewBox="0 0 48 48" fill="currentColor">
-                  <path d="M40 8H24v12h8v16h16V24H32V8zm-16 0H8v12h8v16h16V24H24V8z"/>
-                </svg>
-
-                <!-- Calificación con estrellas -->
+                <div class="testimonial__quote">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M6 17h3l2-4V7H5v6h3l-2 4zm10 0h3l2-4V7h-6v6h3l-2 4z"/>
+                  </svg>
+                </div>
+                <p class="testimonial__text" id="testimonialText">
+                  "El mejor cuidado para Max. El equipo de CanOn salvó la vida de mi golden retriever con su atención profesional y amor por los animales. ¡Gracias por todo!"
+                </p>
                 <div class="testimonial__rating" id="testimonialRating">
-                  <!-- Las estrellas se generarán con JavaScript -->
+                  <!-- Stars will be generated by JavaScript -->
                 </div>
-
-                <!-- Texto del testimonio -->
-                <blockquote class="testimonial__text" id="testimonialText">
-                  ""
-                </blockquote>
-
-                <!-- Información del autor -->
-                <div class="testimonial__author" id="testimonialAuthor">
-                  
-                </div>
-                <div class="testimonial__author-info" id="testimonialAuthorInfo">
-                  
-                </div>
+                <div class="testimonial__author" id="testimonialAuthor">María González</div>
+                <div class="testimonial__author-info" id="testimonialAuthorInfo">Dueña de Max (Golden Retriever)</div>
               </div>
-
-              <!-- Controles del carrusel -->
-              <div class="testimonials__controls" id="testimonialControls">
-                <!-- Los controles se generarán con JavaScript -->
-              </div>
+            </div>
+            
+            <div class="testimonials__controls">
+              <button class="testimonials__control active" onclick="changeTestimonial(0)"></button>
+              <button class="testimonials__control" onclick="changeTestimonial(1)"></button>
+              <button class="testimonials__control" onclick="changeTestimonial(2)"></button>
+              <button class="testimonials__control" onclick="changeTestimonial(3)"></button>
+              <button class="testimonials__control" onclick="changeTestimonial(4)"></button>
             </div>
           </div>
         </div>
       </section>
 
       <!-- Contact Section -->
-      <section id="contacto" class="contact section">
+      <section id="contacto" class="section contact">
         <div class="container">
           <div class="contact__container">
             <!-- Información de contacto -->
             <div class="contact__info">
-              <h2>Contáctanos</h2>
+              <h2>Visítanos o Contáctanos</h2>
               <p class="mb-lg">
-                Estamos aquí para ayudarte. Contáctanos para agendar una cita o resolver cualquier duda sobre el cuidado de tu mascota.
+                Estamos aquí para cuidar de tu mascota. No dudes en visitarnos o contactarnos para cualquier consulta.
               </p>
-
-              <!-- Información de contacto -->
-              <div class="contact__info-list">
-                <div class="contact__info-item">
-                  <svg class="contact__info-icon" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                  </svg>
-                  <div>
-                    <h4 style="margin: 0; font-size: 1rem; font-weight: 600;">Dirección</h4>
-                    <p style="margin: 4px 0 0 0; color: var(--color-text-secondary); white-space: pre-line;">
-                      Av. Principal 123, Ciudad, Estado 12345
-                    </p>
-                  </div>
-                </div>
-
-                <div class="contact__info-item">
-                  <svg class="contact__info-icon" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
-                  </svg>
-                  <div>
-                    <h4 style="margin: 0; font-size: 1rem; font-weight: 600;">Teléfono</h4>
-                    <p style="margin: 4px 0 0 0; color: var(--color-text-secondary);">
-                      +1 (234) 567-8900
-                    </p>
-                  </div>
-                </div>
-
-                <div class="contact__info-item">
-                  <svg class="contact__info-icon" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                  </svg>
-                  <div>
-                    <h4 style="margin: 0; font-size: 1rem; font-weight: 600;">Horarios</h4>
-                    <p style="margin: 4px 0 0 0; color: var(--color-text-secondary); white-space: pre-line;">
-                      Lun - Vie: 8:00 AM - 8:00 PM
-Sáb - Dom: 9:00 AM - 6:00 PM
-                    </p>
-                  </div>
+              
+              <div class="contact__info-item">
+                <svg class="contact__info-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                </svg>
+                <div>
+                  <strong>Dirección:</strong><br>
+                  Av. Principal 123<br>
+                  Ciudad, Estado 12345
                 </div>
               </div>
 
-              <!-- Mapa placeholder -->
-              <div style="margin-top: var(--space-lg); border-radius: var(--radius-lg); overflow: hidden;">
-                <div style="width: 100%; height: 300px; background-color: var(--color-primary-100); display: flex; align-items: center; justify-content: center; color: var(--color-primary-500); font-size: 1.125rem; font-weight: 600;">
-                  🗺️ Mapa Interactivo
-                  <br>
-                  <small style="font-size: 0.875rem; font-weight: normal;">
-                    Ubicación de la veterinaria
-                  </small>
+              <div class="contact__info-item">
+                <svg class="contact__info-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                </svg>
+                <div>
+                  <strong>Teléfono:</strong><br>
+                  <a href="tel:+1234567890">+1 (234) 567-8900</a>
+                </div>
+              </div>
+
+              <div class="contact__info-item">
+                <svg class="contact__info-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+                <div>
+                  <strong>Horarios:</strong><br>
+                  Lun - Vie: 8:00 AM - 8:00 PM<br>
+                  Sáb - Dom: 9:00 AM - 6:00 PM<br>
+                  <span style="color: var(--color-error); font-weight: 600;">Emergencias: 24/7</span>
+                </div>
+              </div>
+
+              <div class="contact__map">
+                <div class="contact__map-content">
+                  <h3>🗺️ Mapa Interactivo</h3>
+                  <p>Haz clic para abrir en Google Maps</p>
                 </div>
               </div>
             </div>
 
             <!-- Formulario de contacto -->
             <div class="contact__form-wrapper">
-              <div class="form">
-                <h3 class="mb-md">Envíanos un Mensaje</h3>
+              <form class="form" id="contactForm" onsubmit="handleSubmit(event)">
+                <h3>Solicita tu Cita</h3>
+                <p>Completa el formulario y nos pondremos en contacto contigo pronto.</p>
                 
-                <div class="form__success" id="formSuccess" style="display: none;">
-                  ¡Gracias por tu mensaje! Te contactaremos pronto.
+                <div class="form__group">
+                  <label for="fullName" class="form__label">Nombre Completo *</label>
+                  <input type="text" id="fullName" name="fullName" class="form__input" required>
+                  <div class="form__error" id="fullNameError">Por favor ingresa tu nombre completo</div>
                 </div>
 
-                <form id="contactForm" onsubmit="handleSubmit(event)" novalidate>
-                  <div class="form__group">
-                    <label for="nombre" class="form__label">Nombre Completo *</label>
-                    <input type="text" id="nombre" name="nombre" class="form__input" placeholder="Tu nombre completo" required>
-                    <span class="form__error" id="nombreError"></span>
-                  </div>
+                <div class="form__group">
+                  <label for="email" class="form__label">Correo Electrónico *</label>
+                  <input type="email" id="email" name="email" class="form__input" required>
+                  <div class="form__error" id="emailError">Por favor ingresa un correo válido</div>
+                </div>
 
-                  <div class="form__group">
-                    <label for="email" class="form__label">Correo Electrónico *</label>
-                    <input type="email" id="email" name="email" class="form__input" placeholder="tu@email.com" required>
-                    <span class="form__error" id="emailError"></span>
-                  </div>
+                <div class="form__group">
+                  <label for="phone" class="form__label">Teléfono *</label>
+                  <input type="tel" id="phone" name="phone" class="form__input" required>
+                  <div class="form__error" id="phoneError">Por favor ingresa tu número de teléfono</div>
+                </div>
 
-                  <div class="form__group">
-                    <label for="telefono" class="form__label">Teléfono *</label>
-                    <input type="tel" id="telefono" name="telefono" class="form__input" placeholder="+1 (234) 567-8900" required>
-                    <span class="form__error" id="telefonoError"></span>
-                  </div>
+                <div class="form__group">
+                  <label for="petName" class="form__label">Nombre de tu Mascota</label>
+                  <input type="text" id="petName" name="petName" class="form__input">
+                </div>
 
-                  <div class="form__group">
-                    <label for="mascota" class="form__label">Nombre de tu Mascota *</label>
-                    <input type="text" id="mascota" name="mascota" class="form__input" placeholder="Nombre de tu mascota" required>
-                    <span class="form__error" id="mascotaError"></span>
-                  </div>
+                <div class="form__group">
+                  <label for="service" class="form__label">Tipo de Servicio</label>
+                  <select id="service" name="service" class="form__select">
+                    <option value="">Selecciona un servicio</option>
+                    <option value="consulta-general">Consulta General</option>
+                    <option value="urgencias">Urgencias 24/7</option>
+                    <option value="vacunacion">Vacunación</option>
+                    <option value="cirugia">Cirugía</option>
+                    <option value="dental">Cuidado Dental</option>
+                    <option value="grooming">Grooming & Estética</option>
+                    <option value="consulta">Consulta Personalizada</option>
+                  </select>
+                </div>
 
-                  <div class="form__group">
-                    <label for="mensaje" class="form__label">Mensaje *</label>
-                    <textarea id="mensaje" name="mensaje" class="form__textarea" placeholder="Cuéntanos sobre tu consulta o situación..." required></textarea>
-                    <span class="form__error" id="mensajeError"></span>
-                  </div>
+                <div class="form__group">
+                  <label for="message" class="form__label">Mensaje *</label>
+                  <textarea id="message" name="message" class="form__textarea" placeholder="Describe las necesidades de tu mascota..." required></textarea>
+                  <div class="form__error" id="messageError">Por favor describe las necesidades de tu mascota</div>
+                </div>
 
-                  <button type="submit" class="btn btn--secondary" id="submitBtn" style="width: 100%;">
-                    Enviar Mensaje
-                  </button>
-                </form>
-              </div>
+                <button type="submit" class="btn btn--primary btn--full">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M2,21L23,12L2,3V10L17,12L2,14V21Z"/>
+                  </svg>
+                  Enviar Mensaje
+                </button>
+
+                <div class="form__success" id="formSuccess">
+                  ¡Gracias! Tu mensaje ha sido enviado correctamente. Nos pondremos en contacto contigo pronto.
+                </div>
+              </form>
             </div>
           </div>
         </div>
@@ -1345,56 +1956,40 @@ Sáb - Dom: 9:00 AM - 6:00 PM
     <footer class="footer">
       <div class="container">
         <div class="footer__container">
-          <!-- Información de la empresa -->
+          <!-- Información principal -->
           <div class="footer__section">
-            <div style="display: flex; align-items: center; gap: var(--space-sm); margin-bottom: var(--space-sm);">
-              <svg width="40" height="40" viewBox="0 0 32 32" fill="currentColor" style="color: var(--color-primary-100);">
-                <ellipse cx="16" cy="20" rx="8" ry="5"/>
-                <ellipse cx="12" cy="10" rx="3" ry="3.5"/>
-                <ellipse cx="16" cy="8" rx="3" ry="3.5"/>
-                <ellipse cx="20" cy="10" rx="3" ry="3.5"/>
-                <ellipse cx="24" cy="13" rx="3" ry="3.5"/>
+            <a href="#inicio" class="footer__logo" onclick="scrollToSection('inicio')">
+              <svg class="footer__logo-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12.5 2C10.57 2 9 3.57 9 5.5c0 1.93 1.57 3.5 3.5 3.5s3.5-1.57 3.5-3.5C16 3.57 14.43 2 12.5 2zM7.5 6C5.57 6 4 7.57 4 9.5S5.57 13 7.5 13 11 11.43 11 9.5 9.43 6 7.5 6zM16.5 6C14.57 6 13 7.57 13 9.5S14.57 13 16.5 13 20 11.43 20 9.5 18.43 6 16.5 6z"/>
               </svg>
-              <h3 style="margin: 0; font-size: 1.5rem; font-weight: 700;">Veterinaria CanOn</h3>
-            </div>
-            <p style="color: var(--color-text-secondary); line-height: 1.6; margin-bottom: var(--space-sm);">
-              Cuidado experto para tu mejor amigo. Más de 15 años brindando medicina veterinaria de calidad con amor y dedicación.
+              Veterinaria CanOn
+            </a>
+            <p>
+              Más de 15 años cuidando la salud y felicidad de tus mascotas con el mejor cuidado profesional y amor incondicional.
             </p>
-            <div style="display: flex; gap: var(--space-sm);">
-              <a href="https://facebook.com/veterinariacanon" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; background-color: var(--color-primary-500); color: var(--color-bg-surface); border-radius: 50%; transition: var(--transition-base); text-decoration: none;" onmouseover="this.style.backgroundColor='var(--color-primary-700)'; this.style.transform='translateY(-2px)';" onmouseout="this.style.backgroundColor='var(--color-primary-500)'; this.style.transform='translateY(0)';">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <div class="footer__social">
+              <a href="#" class="footer__social-link" aria-label="Facebook">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                 </svg>
               </a>
-              <a href="https://instagram.com/veterinariacanon" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; background-color: var(--color-primary-500); color: var(--color-bg-surface); border-radius: 50%; transition: var(--transition-base); text-decoration: none;" onmouseover="this.style.backgroundColor='var(--color-primary-700)'; this.style.transform='translateY(-2px)';" onmouseout="this.style.backgroundColor='var(--color-primary-500)'; this.style.transform='translateY(0)';">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.62 5.367 11.987 11.988 11.987c6.62 0 11.987-5.367 11.987-11.987C24.014 5.367 18.637.001 12.017.001zM8.449 16.988c-1.297 0-2.448-.49-3.323-1.297C4.198 14.824 3.708 13.673 3.708 12.376s.49-2.448 1.418-3.323c.875-.807 2.026-1.297 3.323-1.297s2.448.49 3.323 1.297c.928.875 1.418 2.026 1.418 3.323s-.49 2.448-1.418 3.323c-.875.807-2.026 1.297-3.323 1.297z"/>
+              <a href="#" class="footer__social-link" aria-label="Instagram">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
                 </svg>
               </a>
-              <a href="https://wa.me/1234567890" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; background-color: var(--color-primary-500); color: var(--color-bg-surface); border-radius: 50%; transition: var(--transition-base); text-decoration: none;" onmouseover="this.style.backgroundColor='var(--color-primary-700)'; this.style.transform='translateY(-2px)';" onmouseout="this.style.backgroundColor='var(--color-primary-500)'; this.style.transform='translateY(0)';">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.687"/>
+              <a href="#" class="footer__social-link" aria-label="WhatsApp">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
                 </svg>
               </a>
             </div>
-          </div>
-
-          <!-- Enlaces rápidos -->
-          <div class="footer__section">
-            <h3>Enlaces Rápidos</h3>
-            <ul class="footer__links">
-              <li><a href="#inicio" onclick="scrollToSection('inicio')">Inicio</a></li>
-              <li><a href="#servicios" onclick="scrollToSection('servicios')">Servicios</a></li>
-              <li><a href="#nosotros" onclick="scrollToSection('nosotros')">Nosotros</a></li>
-              <li><a href="#testimonios" onclick="scrollToSection('testimonios')">Testimonios</a></li>
-              <li><a href="#contacto" onclick="scrollToSection('contacto')">Contacto</a></li>
-            </ul>
           </div>
 
           <!-- Servicios -->
           <div class="footer__section">
             <h3>Nuestros Servicios</h3>
-            <ul class="footer__links">
+            <ul>
               <li><a href="#servicios" onclick="scrollToSection('servicios')">Consulta General</a></li>
               <li><a href="#servicios" onclick="scrollToSection('servicios')">Urgencias 24/7</a></li>
               <li><a href="#servicios" onclick="scrollToSection('servicios')">Vacunación</a></li>
@@ -1403,306 +1998,356 @@ Sáb - Dom: 9:00 AM - 6:00 PM
               <li><a href="#servicios" onclick="scrollToSection('servicios')">Grooming</a></li>
             </ul>
           </div>
+
+          <!-- Enlaces rápidos -->
+          <div class="footer__section">
+            <h3>Enlaces Rápidos</h3>
+            <ul>
+              <li><a href="#inicio" onclick="scrollToSection('inicio')">Inicio</a></li>
+              <li><a href="#nosotros" onclick="scrollToSection('nosotros')">Nosotros</a></li>
+              <li><a href="#testimonios" onclick="scrollToSection('testimonios')">Testimonios</a></li>
+              <li><a href="#contacto" onclick="scrollToSection('contacto')">Contacto</a></li>
+              <li><a href="tel:+1234567890">Emergencias: +1 (234) 567-8900</a></li>
+            </ul>
+          </div>
+
+          <!-- Horarios -->
+          <div class="footer__section">
+            <h3>Horarios de Atención</h3>
+            <ul style="list-style: none; padding: 0;">
+              <li><strong>Lunes - Viernes:</strong><br>8:00 AM - 8:00 PM</li>
+              <li><strong>Sábados - Domingos:</strong><br>9:00 AM - 6:00 PM</li>
+              <li style="color: var(--color-accent-500); font-weight: 600;">Emergencias: 24/7</li>
+            </ul>
+          </div>
         </div>
 
-        <!-- Información de contacto en el footer -->
-        <div style="border-top: 1px solid #374151; margin-top: var(--space-xl); padding-top: var(--space-md); text-align: center; color: var(--color-text-secondary);">
-          <div style="margin-bottom: var(--space-sm);">
-            <strong style="color: var(--color-bg-surface);">📍 Av. Principal 123, Ciudad, Estado 12345</strong>
-          </div>
-          <div style="margin-bottom: var(--space-sm);">
-            <strong style="color: var(--color-bg-surface);">📞 +1 (234) 567-8900</strong>
-          </div>
-          <div style="margin-bottom: var(--space-sm);">
-            <strong style="color: var(--color-bg-surface);">⏰ Lun - Vie: 8:00 AM - 8:00 PM | Sáb - Dom: 9:00 AM - 6:00 PM</strong>
-          </div>
-        </div>
-
-        <!-- Copyright -->
         <div class="footer__bottom">
-          <p style="margin: 0;">
-            © 2025 Veterinaria CanOn. Todos los derechos reservados. | 
-            <span style="margin-left: 8px;">
-              <strong>Diseñado por Alejandro Liendo</strong>
-            </span>
-          </p>
+          <p>&copy; 2025 Veterinaria CanOn. Todos los derechos reservados. | Diseñado por Alejandro Liendo</p>
         </div>
       </div>
     </footer>
 
+    <!-- JavaScript -->
     <script>
       // ===============================================
-      // JAVASCRIPT FUNCIONAL
-      // Diseñado por Alejandro Liendo
+      // FUNCIONES PRINCIPALES
       // ===============================================
 
-      // Smooth scroll functionality
-      function scrollToSection(sectionId) {
-        const element = document.getElementById(sectionId);
-        if (element) {
-          element.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
-        }
-      }
-
-      // Mobile menu toggle
-      function toggleMobileMenu() {
-        const menu = document.getElementById('mobileMenu');
-        menu.classList.toggle('active');
-      }
-
-      // Animated counters
-      function animateCounter(elementId, end, duration) {
-        const element = document.getElementById(elementId);
-        const start = 0;
-        const increment = end / (duration / 16);
-        let current = start;
-
-        const timer = setInterval(() => {
-          current += increment;
-          if (current >= end) {
-            element.textContent = end.toLocaleString();
-            clearInterval(timer);
-          } else {
-            element.textContent = Math.floor(current).toLocaleString();
-          }
-        }, 16);
-      }
-
-      // Testimonials data
+      // Variables globales
+      let currentTestimonial = 0;
       const testimonials = [
         {
-          text: "Excelente atención. Los veterinarios son muy profesionales y amables. Mi perro Max se sintió muy cómodo durante toda la consulta. Definitivamente volveremos.",
+          text: "El mejor cuidado para Max. El equipo de CanOn salvó la vida de mi golden retriever con su atención profesional y amor por los animales. ¡Gracias por todo!",
           author: "María González",
           authorInfo: "Dueña de Max (Golden Retriever)",
           rating: 5
         },
         {
-          text: "Llevamos a nuestros gatos aquí hace 3 años. Siempre nos brindan el mejor cuidado y han sido fundamentales para mantener a Luna y Oliver saludables.",
+          text: "Increíble atención para mi gata Luna. El veterinario fue muy paciente y me explicó todo detalladamente. Mi gata se siente mucho mejor ahora.",
           author: "Carlos Rodríguez",
-          authorInfo: "Dueño de Luna y Oliver (Gatos)",
+          authorInfo: "Dueño de Luna (Gata Persa)",
           rating: 5
         },
         {
-          text: "Cuando mi perra tuvo una emergencia a las 2 AM, ellos estuvieron disponibles inmediatamente. Su rapidez y profesionalismo salvaron la vida de Bella.",
+          text: "Llevamos a nuestros tres perros a CanOn hace 3 años y siempre han recibido el mejor cuidado. El personal es amable y muy profesional.",
           author: "Ana Martínez",
-          authorInfo: "Dueña de Bella (Border Collie)",
+          authorInfo: "Dueña de Rocky, Bella y Charlie",
           rating: 5
         },
         {
-          text: "El trato es excepcional, tanto para las mascotas como para los dueños. Se nota que aman lo que hacen y tienen mucha experiencia.",
-          author: "Roberto Silva",
-          authorInfo: "Dueño de Rocky (Pastor Alemán)",
+          text: "Mi hámster Chewbacca necesitaba una cirugía urgente. El equipo de CanOn actuó rápido y profesional. Ahora está completamente recuperado.",
+          author: "Miguel Fernández",
+          ownerInfo: "Dueño de Chewbacca (Hámster)",
+          rating: 5
+        },
+        {
+          text: "Excelente servicio de grooming. Mi perro Bobby nunca había quedado tan bonito. El staff es muy cariñoso con los animales.",
+          author: "Laura Sánchez",
+          authorInfo: "Dueña de Bobby (Bulldog Francés)",
           rating: 5
         }
       ];
 
-      let currentTestimonial = 0;
-
-      // Render stars
-      function renderStars(rating) {
-        let starsHTML = '';
-        for (let i = 0; i < 5; i++) {
-          const fill = i < rating ? 'var(--color-accent-500)' : 'var(--color-text-secondary)';
-          const opacity = i < rating ? '1' : '0.3';
-          starsHTML += `<svg class="star" viewBox="0 0 24 24" fill="${fill}" style="opacity: ${opacity};">
-            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-          </svg>`;
+      // Navegación suave
+      function scrollToSection(sectionId) {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          const headerHeight = document.getElementById('header').offsetHeight;
+          const elementPosition = element.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+          
+          window.scrollTo({
+            top: elementPosition,
+            behavior: 'smooth'
+          });
         }
-        return starsHTML;
       }
 
-      // Render testimonial
-      function renderTestimonial(index) {
-        const testimonial = testimonials[index];
-        document.getElementById('testimonialRating').innerHTML = renderStars(testimonial.rating);
-        document.getElementById('testimonialText').textContent = `"${testimonial.text}"`;
+      // Menú móvil
+      function toggleMobileMenu() {
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileIcon = document.getElementById('mobile-menu-icon');
+        
+        mobileMenu.classList.toggle('active');
+        mobileIcon.textContent = mobileMenu.classList.contains('active') ? '✕' : '☰';
+      }
+
+      // Header scrolled effect
+      function handleHeaderScroll() {
+        const header = document.getElementById('header');
+        if (window.scrollY > 100) {
+          header.classList.add('header--scrolled');
+        } else {
+          header.classList.remove('header--scrolled');
+        }
+      }
+
+      // Contadores animados
+      function animateCounter(element, start, end, duration, suffix = '') {
+        let startTimestamp = null;
+        const step = (timestamp) => {
+          if (!startTimestamp) startTimestamp = timestamp;
+          const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+          const current = Math.floor(progress * (end - start) + start);
+          element.textContent = current + suffix;
+          if (progress < 1) {
+            window.requestAnimationFrame(step);
+          }
+        };
+        window.requestAnimationFrame(step);
+      }
+
+      // Inicializar contadores cuando sean visibles
+      function initCounters() {
+        const expCounter = document.getElementById('expCounter');
+        const petsCounter = document.getElementById('petsCounter');
+        const satCounter = document.getElementById('satCounter');
+        const docCounter = document.getElementById('docCounter');
+
+        if (expCounter) {
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                animateCounter(expCounter, 0, 15, 2000, '+');
+                animateCounter(petsCounter, 0, 5000, 2500, '+');
+                animateCounter(satCounter, 0, 98, 2000, '%');
+                animateCounter(docCounter, 0, 12, 1500, '+');
+                observer.unobserve(entry.target);
+              }
+            });
+          }, { threshold: 0.5 });
+
+          observer.observe(expCounter);
+        }
+      }
+
+      // Testimonios
+      function updateTestimonial() {
+        const testimonial = testimonials[currentTestimonial];
+        
+        document.getElementById('testimonialText').textContent = testimonial.text;
         document.getElementById('testimonialAuthor').textContent = testimonial.author;
         document.getElementById('testimonialAuthorInfo').textContent = testimonial.authorInfo;
-      }
-
-      // Render controls
-      function renderControls() {
-        let controlsHTML = '';
-        for (let i = 0; i < testimonials.length; i++) {
-          const activeClass = i === currentTestimonial ? 'active' : '';
-          controlsHTML += `<button class="testimonials__control ${activeClass}" onclick="goToTestimonial(${i})" aria-label="Ver testimonio ${i + 1}"></button>`;
-        }
-        document.getElementById('testimonialControls').innerHTML = controlsHTML;
-      }
-
-      // Go to testimonial
-      function goToTestimonial(index) {
-        currentTestimonial = index;
-        renderTestimonial(currentTestimonial);
-        renderControls();
-      }
-
-      // Next testimonial
-      function nextTestimonial() {
-        currentTestimonial = (currentTestimonial + 1) % testimonials.length;
-        renderTestimonial(currentTestimonial);
-        renderControls();
-      }
-
-      // Form validation
-      function validateForm() {
-        let isValid = true;
-        const errors = {};
-
-        // Validate nombre
-        const nombre = document.getElementById('nombre').value.trim();
-        if (!nombre) {
-          errors.nombre = 'El nombre es obligatorio';
-          isValid = false;
-        }
-
-        // Validate email
-        const email = document.getElementById('email').value.trim();
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!email) {
-          errors.email = 'El email es obligatorio';
-          isValid = false;
-        } else if (!emailRegex.test(email)) {
-          errors.email = 'El email no es válido';
-          isValid = false;
-        }
-
-        // Validate teléfono
-        const telefono = document.getElementById('telefono').value.trim();
-        const phoneRegex = /^[+]?[\d\s\-()]+$/;
-        if (!telefono) {
-          errors.telefono = 'El teléfono es obligatorio';
-          isValid = false;
-        } else if (!phoneRegex.test(telefono)) {
-          errors.telefono = 'El teléfono no es válido';
-          isValid = false;
-        }
-
-        // Validate mascota
-        const mascota = document.getElementById('mascota').value.trim();
-        if (!mascota) {
-          errors.mascota = 'El nombre de la mascota es obligatorio';
-          isValid = false;
-        }
-
-        // Validate mensaje
-        const mensaje = document.getElementById('mensaje').value.trim();
-        if (!mensaje) {
-          errors.mensaje = 'El mensaje es obligatorio';
-          isValid = false;
-        }
-
-        // Display errors
-        Object.keys(errors).forEach(field => {
-          const errorElement = document.getElementById(field + 'Error');
-          const inputElement = document.getElementById(field);
+        
+        // Actualizar rating
+        const ratingContainer = document.getElementById('testimonialRating');
+        ratingContainer.innerHTML = '';
+        for (let i = 0; i < 5; i++) {
+          const star = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+          star.setAttribute('width', '20');
+          star.setAttribute('height', '20');
+          star.setAttribute('viewBox', '0 0 24 24');
+          star.setAttribute('fill', 'currentColor');
+          star.setAttribute('class', 'star');
           
-          if (errors[field]) {
-            errorElement.textContent = errors[field];
-            errorElement.classList.add('active');
-            inputElement.classList.add('error');
+          const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          path.setAttribute('d', 'M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z');
+          
+          if (i < testimonial.rating) {
+            path.style.fill = 'var(--color-accent-500)';
           } else {
-            errorElement.textContent = '';
-            errorElement.classList.remove('active');
-            inputElement.classList.remove('error');
+            path.style.fill = 'var(--color-text-secondary)';
           }
+          
+          star.appendChild(path);
+          ratingContainer.appendChild(star);
+        }
+        
+        // Actualizar controles
+        document.querySelectorAll('.testimonials__control').forEach((control, index) => {
+          control.classList.toggle('active', index === currentTestimonial);
         });
-
-        return isValid;
       }
 
-      // Handle form submission
+      function changeTestimonial(index) {
+        currentTestimonial = index;
+        updateTestimonial();
+      }
+
+      function autoAdvanceTestimonials() {
+        setInterval(() => {
+          currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+          updateTestimonial();
+        }, 6000);
+      }
+
+      // Formulario
       function handleSubmit(event) {
         event.preventDefault();
         
-        if (!validateForm()) {
-          return;
+        const form = event.target;
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData);
+        
+        // Validar campos
+        let isValid = true;
+        
+        // Limpiar errores previos
+        document.querySelectorAll('.form__error').forEach(error => {
+          error.style.display = 'none';
+        });
+        
+        // Validar nombre
+        if (!data.fullName || data.fullName.trim().length < 2) {
+          document.getElementById('fullNameError').style.display = 'block';
+          isValid = false;
         }
-
-        const submitBtn = document.getElementById('submitBtn');
-        const originalText = submitBtn.textContent;
-        submitBtn.textContent = 'Enviando...';
-        submitBtn.disabled = true;
-
-        // Simulate form submission
-        setTimeout(() => {
-          document.getElementById('formSuccess').style.display = 'block';
-          document.getElementById('contactForm').reset();
-          submitBtn.textContent = originalText;
-          submitBtn.disabled = false;
+        
+        // Validar email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!data.email || !emailRegex.test(data.email)) {
+          document.getElementById('emailError').style.display = 'block';
+          isValid = false;
+        }
+        
+        // Validar teléfono
+        if (!data.phone || data.phone.trim().length < 10) {
+          document.getElementById('phoneError').style.display = 'block';
+          isValid = false;
+        }
+        
+        // Validar mensaje
+        if (!data.message || data.message.trim().length < 10) {
+          document.getElementById('messageError').style.display = 'block';
+          isValid = false;
+        }
+        
+        if (isValid) {
+          // Simular envío exitoso
+          console.log('Datos del formulario:', data);
           
-          // Hide success message after 5 seconds
+          // Mostrar mensaje de éxito
+          document.getElementById('formSuccess').style.display = 'block';
+          
+          // Limpiar formulario
+          form.reset();
+          
+          // Ocultar mensaje de éxito después de 5 segundos
           setTimeout(() => {
             document.getElementById('formSuccess').style.display = 'none';
           }, 5000);
-        }, 2000);
-      }
-
-      // Intersection Observer for animations
-      function setupIntersectionObserver() {
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              if (entry.target.id === 'nosotros') {
-                // Start counters when about section is visible
-                setTimeout(() => {
-                  animateCounter('expCounter', 15, 2000);
-                  animateCounter('petsCounter', 5000, 2500);
-                  animateCounter('satCounter', 98, 1800);
-                  animateCounter('docCounter', 12, 1500);
-                }, 500);
-              }
-            }
-          });
-        }, { threshold: 0.5 });
-
-        observer.observe(document.getElementById('nosotros'));
-      }
-
-      // Close mobile menu when clicking outside
-      function closeMobileMenuOnClick(event) {
-        const mobileMenu = document.getElementById('mobileMenu');
-        const mobileToggle = document.querySelector('.header__mobile-toggle');
-        
-        if (!mobileMenu.contains(event.target) && !mobileToggle.contains(event.target)) {
-          mobileMenu.classList.remove('active');
         }
       }
 
-      // Initialize everything when page loads
+      // Validación en tiempo real
+      function initFormValidation() {
+        document.getElementById('fullName').addEventListener('blur', function() {
+          const error = document.getElementById('fullNameError');
+          if (this.value.trim().length < 2) {
+            error.style.display = 'block';
+          } else {
+            error.style.display = 'none';
+          }
+        });
+        
+        document.getElementById('email').addEventListener('blur', function() {
+          const error = document.getElementById('emailError');
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!this.value || !emailRegex.test(this.value)) {
+            error.style.display = 'block';
+          } else {
+            error.style.display = 'none';
+          }
+        });
+        
+        document.getElementById('phone').addEventListener('blur', function() {
+          const error = document.getElementById('phoneError');
+          if (!this.value || this.value.trim().length < 10) {
+            error.style.display = 'block';
+          } else {
+            error.style.display = 'none';
+          }
+        });
+        
+        document.getElementById('message').addEventListener('blur', function() {
+          const error = document.getElementById('messageError');
+          if (!this.value || this.value.trim().length < 10) {
+            error.style.display = 'block';
+          } else {
+            error.style.display = 'none';
+          }
+        });
+      }
+
+      // Efectos de scroll
+      function initScrollAnimations() {
+        const observerOptions = {
+          threshold: 0.1,
+          rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('fade-in-up');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, observerOptions);
+
+        // Observar elementos que necesitan animación
+        document.querySelectorAll('.card, .service-card, .about__stat, .testimonial__card').forEach(el => {
+          observer.observe(el);
+        });
+      }
+
+      // ===============================================
+      // INICIALIZACIÓN
+      // ===============================================
+
+      // Cuando el DOM esté cargado
       document.addEventListener('DOMContentLoaded', function() {
-        // Initialize testimonials
-        renderTestimonial(currentTestimonial);
-        renderControls();
+        // Inicializar funcionalidades
+        initCounters();
+        updateTestimonial();
+        autoAdvanceTestimonials();
+        initFormValidation();
+        initScrollAnimations();
         
-        // Auto-advance testimonials every 5 seconds
-        setInterval(nextTestimonial, 5000);
+        // Event listeners
+        window.addEventListener('scroll', handleHeaderScroll);
         
-        // Setup intersection observer for animations
-        setupIntersectionObserver();
-        
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', closeMobileMenuOnClick);
-        
-        // Add keyboard navigation for testimonials
-        document.addEventListener('keydown', function(event) {
-          if (event.key === 'ArrowLeft') {
-            currentTestimonial = (currentTestimonial - 1 + testimonials.length) % testimonials.length;
-            renderTestimonial(currentTestimonial);
-            renderControls();
-          } else if (event.key === 'ArrowRight') {
-            nextTestimonial();
+        // Cerrar menú móvil al hacer clic fuera
+        document.addEventListener('click', function(event) {
+          const mobileMenu = document.getElementById('mobile-menu');
+          const mobileBtn = document.querySelector('.header__mobile-btn');
+          
+          if (mobileMenu.classList.contains('active') && 
+              !mobileMenu.contains(event.target) && 
+              !mobileBtn.contains(event.target)) {
+            toggleMobileMenu();
           }
         });
       });
 
-      // Handle window resize for mobile menu
-      window.addEventListener('resize', function() {
-        if (window.innerWidth >= 768) {
-          document.getElementById('mobileMenu').classList.remove('active');
+      // Prevenir envío del formulario al presionar Enter en campos de texto
+      document.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter' && event.target.tagName === 'INPUT') {
+          event.preventDefault();
+          const nextElement = event.target.nextElementSibling;
+          if (nextElement && nextElement.tagName === 'INPUT') {
+            nextElement.focus();
+          }
         }
       });
     </script>
